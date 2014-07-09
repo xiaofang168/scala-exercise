@@ -51,6 +51,16 @@ object Test03Map {
       println("List Map")
   }
 
+  def matchObject[T: Manifest](o:  T) {
+    if (manifest[T] <:< manifest[String])
+      println("String obj")
+    else if (manifest[T] <:< manifest[Int])
+      println("Int obj")
+    else if (manifest[T] <:< manifest[List[_]])
+      println("List obj")
+  }
+
+  
   def main(args: Array[String]) {
     val mf = (new MakeFoo[String]).make
     println(mf)
@@ -77,7 +87,7 @@ object Test03Map {
       }
     }
     map.foreach(e => {
-      e._2.foreach(a => println(a._2.isInstanceOf[List[_]]))
+      e._2.foreach(a => matchObject(a._2))
     })
   }
 }
