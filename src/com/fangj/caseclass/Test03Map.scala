@@ -65,6 +65,19 @@ object Test03Map {
       matchMap(m._2)
 
     })
-
+    //代码正确后match会始终匹配第一个case（类型擦除）
+    map.foreach {
+      case (key, value) => {
+        value.foreach {
+          case (k, v) =>
+            if (v.isInstanceOf[List[_]]) {
+              println("list")
+            } else println("int")
+        }
+      }
+    }
+    map.foreach(e => {
+      e._2.foreach(a => println(a._2.isInstanceOf[List[_]]))
+    })
   }
 }
