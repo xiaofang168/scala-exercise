@@ -19,9 +19,10 @@ object Test02 {
     processItem(List("red", "blue", "white"))
     processItem(List("red", "blue", "green"))
     processItem(List("apple", "orange", "banana"))
+    processItem(List("apple", "orange", "banana"), List("banana", "pair", "watermelon"): _*)
   }
 
-  def processItem(items: List[String]) {
+  def processItem(items: List[String], s: String*) {
     items match {
       case List("apple", "ibm") => println("apple and ibm")
       case List("red", "blue", "white") => println("red and blue and white")
