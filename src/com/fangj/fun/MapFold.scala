@@ -14,8 +14,20 @@ package com.fangj.fun
  */
 object MapFold {
   def main(args: Array[String]) {
-    val map = Map("a" -> 40, "b" -> 35, "c" -> 20)
+    val map = Map("a" -> 40, "b" -> 35, "c" -> 20, "sort" -> "+id,age-")
     Console println map.foldLeft("")((a, t) => a + t._1 + " = " + t._2 + " and ")
     Console println map.foldLeft("")((acc, kv) => acc + kv._1 + kv._2)
+    val sort = (map.filter(_._1.contains("sort")) map {
+      case (k, v) => {
+        v.toString.split(",").toList map {
+          case (field) => {
+            val sort = if (field.toString.contains("-")) " desc" else " asc"
+            field.toString.replaceAll("\\-|\\+", "") + sort
+          }
+        } mkString (",")
+      }
+    } foldLeft ("order by "))((a, b) => a + b)
+
+    Console println sort
   }
 }
