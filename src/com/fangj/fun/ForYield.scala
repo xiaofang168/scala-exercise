@@ -30,6 +30,7 @@ class ForYield {
 
   //习惯性的拆分关注点,不像虾爬子(代码长得跟虾耙子一样,十只脚抓了10个关注点，逻辑不清晰)
   def aa() {
+    //不想把函数定义成val，定义成def也行
     val sortItem: String => String = in => in.replaceAll("[+-]$", "") + (if (in.endsWith("-")) " desc" else " asc")
     val sortItems: String => String = _.split(",") map sortItem mkString (", ")
     val parseSort: Map[String, String] => String = _.get("sort") map sortItems map ("order by " + _) getOrElse ""
