@@ -19,7 +19,7 @@ object MapFold {
     Console println map.foldLeft("")((acc, kv) => acc + kv._1 + kv._2)
     val sort = (map.filter(_._1.contains("sort")) map {
       case (k, v) => {
-        v.toString.split(",").toList map {
+        v.toString.split(",") map {
           case (field) => {
             val sort = if (field.toString.contains("-")) " desc" else " asc"
             field.toString.replaceAll("\\-|\\+", "") + sort
