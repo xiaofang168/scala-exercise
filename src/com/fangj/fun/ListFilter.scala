@@ -20,7 +20,7 @@ object ListFilter {
     // 获取查询列
     val list = List("id", "name", "age", "sex")
     val display = new Display(List("*"), List("name", "age"))
-    val result = if (display.exclude == null) display.include else list.filter(!display.exclude.contains(_))
+    val result = if (display.exclude == null) display.include else list.filterNot(display.exclude.contains(_))
     Console println result
 
     val unionList = list.union(List("id"))
