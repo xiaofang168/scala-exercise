@@ -19,7 +19,7 @@ object ListFilter {
   def main(args: Array[String]) {
     // 获取查询列
     val list = List("id", "name", "age", "sex")
-    val display = new Display(List("*"), List("name", "age"))
+    val display = new Display(List("*"), List("name", "age"), Map())
     val result = if (display.exclude == null) display.include else list.filterNot(display.exclude.contains(_))
     Console println result
 
@@ -31,5 +31,13 @@ object ListFilter {
     // 添加的额外的查询字段数组
     val additionalSelectFields = joinSelectField(display.additionalFields)
     Console println additionalSelectFields
+
+    getFirstAndLast(List[String]("2", "3", "5", "6"))
+  }
+
+  def getFirstAndLast(list: List[_]) = list match {
+
+    case l1 :: l2 => println(l1 + ">>>" + l2)
+    case _ => println("not found")
   }
 }
