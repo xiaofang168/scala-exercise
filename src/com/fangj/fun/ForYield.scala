@@ -6,8 +6,6 @@
  */
 package com.fangj.fun
 
-import sun.org.mozilla.javascript.internal.ast.Yield
-
 /**
  * @ClassName: ForYield
  * @Description: TODO
