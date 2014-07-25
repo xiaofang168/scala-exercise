@@ -24,9 +24,9 @@ object ListSortTest extends Application {
     new Row("Hans", "7", "Dublin"),
     new Row("Hugo", "2", "Sligo"))
   //val s = List("10", "3", "8", "0", "2")
-  val result = (rows.sortBy(r => (r.lastName, r.firstName)))(Ordering.Tuple2(Ordering.String.reverse, Ordering.String))
+  //val result = (rows.sortBy(r => (r.lastName, r.firstName)))(Ordering.Tuple2(Ordering.String.reverse, Ordering.String))
   //val result = s.sortWith(compfn1(_, _))
-  Console println result
+  //Console println result
   aa
   //rows.sortWith(lt)
 
@@ -38,68 +38,86 @@ object ListSortTest extends Application {
 
   def aa() {
     val sortItems = List("id", "age")
-    val result = List(Map[String, String]("id" -> "7", "age" -> "40"),Map[String, String]("id" -> "10", "age" -> "48"), Map[String, String]("id" -> "19", "age" -> "40"))
-
-    //类型排序
-    val sortResult = result.sortBy(m => {
-      val sortConditions = for (sortItem <- sortItems) yield (m(sortItem))
-      sortConditions mkString
-
-    })
-
-    val s = "-"
-    val a = result.sortWith((m1, m2) => {
-      //      val test = for (
-      //        sortItem <- sortItems
-      //
-      //      ) yield ((op: String) => if (op == "-") m1(sortItem) < m2(sortItem) else m1(sortItem) > m2(sortItem))
-      //for (a <- test) yield (a("-"))
-      m1("id") < m2("id")
-    }) sortWith ((m1, m2) => m1("age") < m2("age"))
-    Console println a
-
-    //类型排序
-    val typeSortResult = result.sortBy(m => ((m(sortItems(0))).toInt, m("age")))(Ordering.Tuple2(Ordering.Int, getOrdering("")))
-    Console println typeSortResult
+    val result = List(Map[String, String]("id" -> "7", "age" -> "40"), Map[String, String]("id" -> "10", "age" -> "48"), Map[String, String]("id" -> "19", "age" -> "40"))
 
     val sortMap = Map("id" -> "+", "age" -> "+")
+
+    val typeMap = Map[String, String]("id" -> "double", "age" -> "double", "name" -> "string")
 
     val myOrdering: (List[Map[String, String]], Array[String]) => List[Map[String, _]] = (result, sortItems) => {
       sortItems match {
         case Array(e1) => {
-          val sortResult = result.sortBy(m => m(e1).toString())
+          val sortResult = typeMap(e1) match {
+            case "double" => result.sortBy(m => m(e1).toDouble)
+            case _ => result.sortBy(m => m(e1))
+          }
           if (sortMap(e1) == "-") sortResult.reverse else sortResult
         }
         case Array(e1, e2) => {
-          result.sortBy(m => (m(e1), m(e2)))(Ordering.Tuple2(getOrderingBySortOp(sortMap(e1), getOrderingByDataType(e1)), getOrderingBySortOp(sortMap(e2), getOrderingByDataType(e2))))
+          (typeMap(e1), typeMap(e2)) match {
+            // 都为数字的情况
+            case ("double", "double") => {
+              (sortMap(e1), sortMap(e2)) match {
+                // 都为降序的情况
+                case ("-", "-") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double.reverse, Ordering.Double.reverse))
+                // 都为升序的情况
+                case ("+", "+") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double, Ordering.Double))
+                // 前者升序,后者降序
+                case ("+", "-") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double, Ordering.Double.reverse))
+                // 前者降序,后者升序
+                case ("-", "+") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double.reverse, Ordering.Double))
+              }
+            }
+            // 都为字符串的情况
+            case ("string", "string") => {
+              (sortMap(e1), sortMap(e2)) match {
+                // 都为降序的情况
+                case ("-", "-") => result.sortBy(m => (m(e1), m(e2)))(Ordering.Tuple2(Ordering.String.reverse, Ordering.String.reverse))
+                // 都为升序的情况
+                case ("+", "+") => result.sortBy(m => (m(e1), m(e2)))(Ordering.Tuple2(Ordering.String, Ordering.String))
+                // 前者升序,后者降序
+                case ("+", "-") => result.sortBy(m => (m(e1), m(e2)))(Ordering.Tuple2(Ordering.String, Ordering.String.reverse))
+                // 前者降序,后者升序
+                case ("-", "+") => result.sortBy(m => (m(e1), m(e2)))(Ordering.Tuple2(Ordering.String.reverse, Ordering.String))
+              }
+            }
+            // 前者为数字,后者为字符串的情况
+            case ("double", "string") => {
+              (sortMap(e1), sortMap(e2)) match {
+                // 都为降序的情况
+                case ("-", "-") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double.reverse, Ordering.String.reverse))
+                // 都为升序的情况
+                case ("+", "+") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double, Ordering.String))
+                // 前者升序,后者降序
+                case ("+", "-") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double, Ordering.String.reverse))
+                // 前者降序,后者升序
+                case ("-", "+") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double.reverse, Ordering.String))
+              }
+            }
+            // 前者为字符串,后者为数字的情况
+            case ("string", "double") => {
+              (sortMap(e1), sortMap(e2)) match {
+                // 都为降序的情况
+                case ("-", "-") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String.reverse, Ordering.Double.reverse))
+                // 前者升序,后者降序
+                case ("+", "-") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String, Ordering.Double.reverse))
+                // 前者降序,后者升序
+                case ("-", "+") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String.reverse, Ordering.Double))
+              }
+            }
+            case _ => result.sortBy(m => m(e1))
+          }
         }
-        case Array(e1, e2, e3) => {
-          result.sortBy(m => (m(e1), m(e2), m(e3)))(Ordering.Tuple3(getOrderingBySortOp(sortMap(e1), getOrderingByDataType(e1)), getOrderingBySortOp(sortMap(e2), getOrderingByDataType(e2)), getOrderingBySortOp(sortMap(e3), getOrderingByDataType(e3))))
-        }
-        case Array(e1, e2, e3, e4) => {
-          result.sortBy(m => (m(e1), m(e2), m(e3), m(e4)))(Ordering.Tuple4(getOrderingBySortOp(sortMap(e1), getOrderingByDataType(e1)), getOrderingBySortOp(sortMap(e2), getOrderingByDataType(e2)), getOrderingBySortOp(sortMap(e3), getOrderingByDataType(e3)), getOrderingBySortOp(sortMap(e4), getOrderingByDataType(e4))))
-        }
-      }
 
+      }
     }
 
     val r = myOrdering(result, sortItems.toArray)
     println("排序结果:" + r)
-    // (r.lastName, r.firstName))( Ordering.Tuple2(Ordering.String.reverse, Ordering.String)
 
   }
 
-  def getOrdering(sortOp: String) = {
-    if (sortOp == "-") Ordering.String.reverse
-    else Ordering.String
-  }
-
-  def getOrderingByDataType[T](t: T): Ordering[T] = t match {
-    case s: Int => Ordering.Int.asInstanceOf[Ordering[T]]
-    case s: String => Ordering.String.asInstanceOf[Ordering[T]]
-  }
-
-  def getOrderingBySortOp[T](sortOp: String, ordering: Ordering[T]) = {
+  def getOrderingBySortOp[T](sortOp: String, ordering: Ordering[String]) = {
     if (sortOp == "-") ordering.reverse
     else ordering
   }
