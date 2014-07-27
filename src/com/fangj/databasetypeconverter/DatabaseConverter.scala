@@ -10,6 +10,9 @@ import java.sql.Types
 import java.sql.Date
 import java.util.Date
 import java.text.SimpleDateFormat
+import java.sql.Timestamp
+import java.util.Calendar
+import java.util.GregorianCalendar
 
 /**
  * @ClassName: DatabaseConverter
@@ -19,28 +22,17 @@ import java.text.SimpleDateFormat
  * @version: V1.0
  */
 
-object DatabaseConverter extends Application {
+object DatabaseConverter {
 
   implicit class DatabaseTypeConverter(value: String) {
-
-    def converter(t: String): String = {
-      value
-    }
-
-    def converter(t: Double): Double = {
-      value.toDouble
-    }
-
-    def converter(t: BigDecimal): Double = {
-      value.toDouble
-    }
-
-    def converter(t: java.sql.Date): java.util.Date = {
-      new SimpleDateFormat("yyyy-MM-dd").parse(value)
-    }
+    def converter(t: String): String = value
+    def converter(t: Double): Double = value.toDouble
+    def converter(t: BigDecimal): Double = value.toDouble
+    def converter(t: java.sql.Date): java.util.Date = new SimpleDateFormat("yyyy-MM-dd").parse(value)
   }
 
-  def valueConverter(value: String, t: Int) = t match {
+  /**String 转换为其他类型对象(用于传递参数做查询)*/
+  def StringConverterObject(value: String, t: Int) = t match {
     // 数据库字符类型转换为java String类型
     case Types.VARCHAR => value.toString()
     // 数据INTEGER类型转换为java Integer类型
@@ -54,6 +46,22 @@ object DatabaseConverter extends Application {
 
   }
 
-  val value = valueConverter("333", java.sql.Types.INTEGER)
-  println(value)
+  /**其他类型对象转换为String(用于出库,转换json)*/
+  def ObjectConverterString(value: Object, t: Int): String = t match {
+    case Types.DATE => {
+      val databaseObject = value.asInstanceOf[Timestamp]
+      val calendar = Calendar.getInstance().asInstanceOf[GregorianCalendar]
+      calendar.setTimeInMillis(databaseObject.getTime())
+      new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime())
+    }
+    case _ => value.toString()
+  }
+
+  def main(args: Array[String]) {
+    val value = StringConverterObject("333", java.sql.Types.INTEGER)
+    val gc = new GregorianCalendar
+    val str = ObjectConverterString(new Timestamp(gc.getTime().getTime()), Types.DATE)
+    println(str)
+  }
+
 }
