@@ -34,16 +34,18 @@ object NumberSplit extends Application {
 
   def page() {
 
-    val rowCount = 100
+    val rowCount = 101
     // page
     val pageSize = 20
 
     val pageCount = if (rowCount % pageSize == 0) rowCount / pageSize else rowCount / pageSize + 1
 
     val s = for (i <- 1 to pageCount) yield {
-      val startRow = pageSize * (i - 1) + 1
+      // query.setFirstResult(0);//从第一条记录开始
+      // query.setMaxResults(4);//取出四条记录
+      val startRow = pageSize * (i - 1)
       val endRow = if (pageSize * i > rowCount) rowCount else pageSize * i
-      Map("offset" -> startRow, "limit" -> endRow)
+      Map("offset" -> startRow, "limit" -> (endRow - startRow))
     }
     println(s)
   }
