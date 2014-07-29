@@ -53,5 +53,5 @@ object IntConverter {
   val map = Map[String,Any]("2" -> "66", "4" -> 5)
   val s = map("2")
 
-  s converter
+  //s converter
 }
