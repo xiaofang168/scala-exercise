@@ -47,6 +47,40 @@ object FutureExecutionContextOrActor {
       }
     }
     println("ooooo")
-    pool.shutdown
+    test
+    pool.shutdown()
+  }
+
+  def test() {
+    val pool = Executors.newCachedThreadPool()
+    implicit val ec = ExecutionContext.fromExecutorService(pool)
+    val a = Future {
+      Thread.sleep(1000 * 2)
+      println(">>>>>>")
+      "aa"
+    }
+    val b = Future {
+      println("bb:")
+      "bb"
+    }
+    val c = Future {
+      println("cc:")
+      "cc"
+    }
+    val d = Future {
+      println("dd")
+      "dd"
+    }
+
+    val resultF = for {
+      r1 <- a
+      r2 <- b
+      r3 <- c
+    } yield (r1, r2, r3)
+    
+    resultF.onSuccess {
+      case (r1, r2, r3) => println(s"$r1, $r2, $r3"); pool.shutdown()
+    }
+
   }
 }
