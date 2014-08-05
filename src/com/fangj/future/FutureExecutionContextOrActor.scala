@@ -51,6 +51,10 @@ object FutureExecutionContextOrActor {
     pool.shutdown()
   }
 
+  /**
+   * Wait for several Futures
+   * How to wait for list of `Future`s created using different `ExecutorServices`
+   */
   def test() {
     val pool = Executors.newCachedThreadPool()
     implicit val ec = ExecutionContext.fromExecutorService(pool)
@@ -77,7 +81,7 @@ object FutureExecutionContextOrActor {
       r2 <- b
       r3 <- c
     } yield (r1, r2, r3)
-    
+
     resultF.onSuccess {
       case (r1, r2, r3) => println(s"$r1, $r2, $r3"); pool.shutdown()
     }
