@@ -6,6 +6,8 @@
  */
 package com.fangj.loopbreak
 
+import scala.annotation.tailrec
+
 /**
  * @ClassName: LoopBreak
  * @Description: TODO
@@ -15,6 +17,11 @@ package com.fangj.loopbreak
  */
 object LoopBreak {
 
+  /**
+   * Scala对形式上严格的尾递归进行了优化，对于严格的尾递归，可以放心使用，不必担心性能问题。对于是否是严格尾递归，若不能自行判断， 可使用Scala提供的尾递归标注@scala.annotation.tailrec，这个符号除了可以标识尾递归外，更重要的是编译器会检查该函数是否真的尾递归，若不是，会导致如下编译错误
+   * could not optimize @tailrec annotated method fibonacci: it contains a recursive call not in tail position
+   */
+  @tailrec
   def searchIndex(indexList: List[Int], startIndex: Int, endIndex: Int): List[Int] = {
     if (indexList.size >= 100) indexList // 找到!
     else if (endIndex > 100000) indexList
@@ -24,7 +31,6 @@ object LoopBreak {
       println(s"startIndex:$startIndex  endIndex:$endIndex")
       searchIndex(indexList ++ list, endIndex + 1, endIndex + 1 + (endIndex - startIndex)) // 继续找
     }
-
   }
 
   def lrange(startIndex: Int, endIndex: Int): List[Int] = {
