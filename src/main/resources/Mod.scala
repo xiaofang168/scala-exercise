@@ -9,4 +9,3 @@ trait Mod extends (String => String) {
     new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(d2)
   }
 }
-new Mod {}

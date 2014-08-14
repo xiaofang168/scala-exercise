@@ -10,6 +10,8 @@ import eval.fun.Fun
 import java.io.File
 import com.twitter.util.Eval
 import javax.script.ScriptEngineManager
+import scala.io.Source
+import scala.io.Codec
 
 /**
  * @ClassName: Test
@@ -25,7 +27,9 @@ object Test {
     //Console println Eval("1+1")
     val sum = Eval[Int]("1 + 1")
     println(sum)
-    val derived = (new Eval).apply[(String) => String](file)
+    def text = Source.fromFile( file )(Codec.UTF8).mkString
+    println(text)
+    val derived = (new Eval).apply[(String) => String](s"$text \n new Mod {}")
     println(derived("ddd"))
   }
 
