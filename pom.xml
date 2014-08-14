@@ -5,10 +5,16 @@
 	<artifactId>scala-exercise</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
+		<!-- library dependencies -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-compiler</artifactId>
+			<version>2.10.2</version>
+		</dependency>
 		<dependency>
 			<groupId>com.twitter</groupId>
 			<artifactId>util-eval_2.10</artifactId>
-			<version>6.19.0</version>
+			<version>6.12.1</version>
 		</dependency>
 	</dependencies>
 </project>
