@@ -4,12 +4,9 @@
  * @Package: eval
  * @date: 2014-8-14
  */
-package eval
-
-import eval.fun.Fun
+package com.fangj.twitter
 import java.io.File
 import com.twitter.util.Eval
-import javax.script.ScriptEngineManager
 import scala.io.Source
 import scala.io.Codec
 
