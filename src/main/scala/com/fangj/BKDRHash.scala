@@ -37,13 +37,13 @@ object BKDRHash {
       if (chars.length > 1) {
         val ha = h * seed + chars.head
         hash(ha, chars.tail)
-      } else h * seed + chars.head
+      } else (h * seed + chars.head) & 0x7FFFFFFF
     } else 0
   }
 
   def main(args: Array[String]) {
-    val a = BKDRHash("tt")
-    val b = BKDRHash2("tt")
+    val a = BKDRHash("ddhhh")
+    val b = BKDRHash2("ddhhh")
     println(a == b)
   }
 }
