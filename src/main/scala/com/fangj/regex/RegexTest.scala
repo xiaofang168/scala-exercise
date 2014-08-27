@@ -8,7 +8,7 @@
  * @date: 2014年5月12日
  * @version: V1.0
  */
-package com.fangj
+package com.fangj.regex
 
 /**
  * @ClassName: RegexTest
