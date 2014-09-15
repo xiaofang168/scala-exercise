@@ -26,7 +26,15 @@ object Test01 {
     else
       println("Non-stringy list")
   }
+
+  import scala.reflect.runtime.universe.TypeTag
+  def f[A, B](a: A, b: B)(implicit evA: TypeTag[A], evB: TypeTag[B]): Boolean = evA == evB
+  
+  def manOf[T: Manifest](t: T): Manifest[T] = manifest[T]
+  
   def main(args: Array[String]) {
     foo(List("s"))
+    println(f(3, "5"))
+    println(manOf("3"))
   }
 }
