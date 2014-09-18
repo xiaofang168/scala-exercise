@@ -17,7 +17,9 @@ object Test extends App {
 
   def write(str: String) = new IOAction[Unit](println(str))
 
+  read(new State)
   Console println read.apply(new State)
  
   write("<<<<").apply(new State)
+  write("<<<<")(new State)
 }
