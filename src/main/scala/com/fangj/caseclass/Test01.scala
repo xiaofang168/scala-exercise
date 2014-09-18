@@ -27,5 +27,15 @@ object Test01 {
       case myUser @ A(id, name) => println(myUser.id)
     }
 
+    def what(d: Drawing) = d match {
+      case Point(_, _) => "點"
+      case Cylinder(_, _) => "柱"
+    }
+
+    def what2(d: Drawing) = (d: @unchecked) match {
+      case Point(_, _) => "點"
+      case Cylinder(_, _) => "柱"
+    }
+    
   }
 }
