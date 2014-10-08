@@ -52,3 +52,6 @@ History commands:
    !-n    Execute the nth command before this one
    !string    Execute the most recent command starting with 'string'
    !?string    Execute the most recent command containing 'string'
+
+// sbt jar远程仓库 配置
+在当前用户的.sbt目录下新建repositories文件
