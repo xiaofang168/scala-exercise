@@ -1,0 +1,6 @@
+[repositories]
+  local
+  my-maven-proxy-releases: http://10.192.32.252:8081/nexus/content/groups/hik/
+  olegychRepo: https://bitbucket.org/olegych/mvn/raw/default
+  my-ivy-proxy-releases: https://repo.typesafe.com/typesafe/releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
+  cache: file:///Users/fangjie1/.ivy2/cache, [organisation]/[module]/ivy-[revision].xml, [organisation]/[module]/[type]s/[module]-[revision].[type]
