@@ -10,11 +10,18 @@ EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
-scalacOptions ++= Seq("-encoding", "UTF-8", "-target:jvm-1.7")
+scalacOptions ++= Seq("-encoding", "UTF-8", "-target:jvm-1.6")
 
-javacOptions ++= Seq("-encoding", "UTF-8", "-source", "1.7", "-target", "1.7")
+javacOptions ++= Seq("-encoding", "UTF-8", "-source", "1.6", "-target", "1.6")
 
 compileOrder := CompileOrder.JavaThenScala
+
+externalResolvers := Resolver.withDefaultResolvers(resolvers.value, mavenCentral = false)
+
+resolvers ++= Seq(
+      "mavenRepo" at "http://repo1.maven.org/maven2/",
+      "oschina" at "http://maven.oschina.net/content/groups/public"
+)
 
 libraryDependencies ++= {
   Seq(
