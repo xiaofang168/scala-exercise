@@ -30,6 +30,7 @@ object Test0603 {
   def main(args: Array[String]): Unit = {
     val m = "Scala"
     val s = hello(m)
+    val map: Map[String, Either[Double, String]] = Map("a" -> Left(1), "b" -> Right("hello"))
     println(s)
   }
 }
