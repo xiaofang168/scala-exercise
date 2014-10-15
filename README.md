@@ -55,3 +55,9 @@ History commands:
 
 // sbt jar远程仓库 配置
 在当前用户的.sbt目录下新建repositories文件
+
+// maven 命令
+部署发布到远程仓库
+clean compile javadoc:jar source:jar deploy
+生成本地文档和源码包
+clean javadoc:jar source:jar install
