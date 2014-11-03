@@ -61,3 +61,7 @@ History commands:
 clean compile javadoc:jar source:jar deploy
 生成本地文档和源码包
 clean javadoc:jar source:jar install
+
+// sbt 配置 goagent
+在sbt的安装目录 sbt\conf\sbtconfig.txt 增加
+-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8087
