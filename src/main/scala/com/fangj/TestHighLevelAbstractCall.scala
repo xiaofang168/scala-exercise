@@ -1,8 +1,8 @@
 /*
  * Copyright 2015 The Jeff CO.Ltd
- * Prject: scala_test
- * Description: TestCall.scala
- * created at: ����7:42:00
+ * Prject: scala-exercise
+ * Description: TestHighLevelAbstractCall.scala
+ * created at: 下午10:06:29
  */
 package com.fangj
 
