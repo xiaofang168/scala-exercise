@@ -18,6 +18,8 @@ object StreamTest {
   def streamRange(lo: Int, hi: Int): Stream[Int] = {
     println(lo + " ")
     if (lo >= hi) Stream.Empty
+    // x :: xs always produces a list,never a stream
+    // x #:: xs == Stream.cons(x,xs)
     else Stream.cons(lo, streamRange(lo + 1, hi))
   }
 
