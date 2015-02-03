@@ -15,5 +15,16 @@ package com.fangj.toolbox
 import scala.tools.reflect.ToolBox
 object Test extends App {
   val tb = scala.reflect.runtime.universe.runtimeMirror(getClass.getClassLoader).mkToolBox()
-  tb.parse("val a = 1")
+  println(tb.parse("""class Counter(n: Int) {
+  def biggerThan(c: Counter) {
+    this.n > c.n
+  }
+}"""))
+
+println(tb.parse("""class Counter(n: Int) {
+  var count = n
+  def biggerThan(c: Counter) {
+    this.n > c.count
+  }
+}"""))
 }
