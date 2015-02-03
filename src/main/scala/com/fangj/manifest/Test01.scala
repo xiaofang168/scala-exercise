@@ -33,8 +33,8 @@ object Test01 {
   def manOf[T: Manifest](t: T): Manifest[T] = manifest[T]
   
   def main(args: Array[String]) {
-    foo(List("s"))
-    println(f(3, "5"))
+    foo(List(3))
+ 
     println(manOf("3"))
   }
 }

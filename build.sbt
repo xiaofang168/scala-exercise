@@ -16,17 +16,17 @@ javacOptions ++= Seq("-encoding", "UTF-8", "-source", "1.6", "-target", "1.6")
 
 compileOrder := CompileOrder.JavaThenScala
 
-//externalResolvers := Resolver.withDefaultResolvers(resolvers.value, mavenCentral = false)
+externalResolvers := Resolver.withDefaultResolvers(resolvers.value, mavenCentral = false)
 
-//resolvers ++= Seq(
-//      "mavenRepo" at "http://repo1.maven.org/maven2/",
-//      "oschina" at "http://maven.oschina.net/content/groups/public"
-//)
+resolvers ++= Seq(
+      "oschina" at "http://maven.oschina.net/content/groups/public"
+)
 
 libraryDependencies ++= {
   Seq(
 	"org.scala-lang"   %       "scala-compiler"  % "2.10.3",
 	"com.twitter"      %%  	   "util-eval"       % "6.12.1" withSources(),
-	"io.spray" 			  %%  "spray-json"    % "1.2.6" withSources()
+	"io.spray" 			  %%   "spray-json"    % "1.2.6" withSources(),
+	"org.apache.pdfbox" %      "pdfbox"          % "1.8.8"
   )
 }

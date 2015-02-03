@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow name="报批流程">
+<node name="开始" step="0" class="com.fangj.flowservice.FlowService" method="save" form="com.fangj.flowservice.Form">
+<![CDATA[
+ to("1")
+]]>
+</node>
+<node name="报批" step="1" class="com.fangj.flowservice.FlowService" method="save" form="com.fangj.flowservice.Form">
+<![CDATA[
+ to("2")
+]]>
+</node>
+<node name="审核" step="2" class="com.fangj.flowservice.FlowService" method="save" form="com.fangj.flowservice.Form">
+<![CDATA[
+if(form.id>20){
+  to("99")
+}else{
+  to("3")
+}
+]]>
+</node>
+<node name="修改" step="3" class="com.fangj.flowservice.FlowService" method="save" form="com.fangj.flowservice.Form">
+<![CDATA[
+ to("1")
+]]>
+</node>
+</workflow>
