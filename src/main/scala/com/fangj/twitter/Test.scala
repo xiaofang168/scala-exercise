@@ -20,10 +20,13 @@ import scala.io.Codec
 object Test {
   def main(args: Array[String]) {
     val file = new File(getClass().getResource("/Mod.scala").getPath())
-    def text = Source.fromFile( file )(Codec.UTF8).mkString
+    def text = Source.fromFile(file)(Codec.UTF8).mkString
     println(text)
     val derived = (new Eval).apply[(String) => String](s"$text \n new Mod {}")
+    aa(derived)
+    println(derived)
     println(derived("ddd"))
   }
 
+  case class aa(a: String => String) 
 }
