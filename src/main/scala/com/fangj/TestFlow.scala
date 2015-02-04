@@ -25,20 +25,65 @@ object TestFlow extends App {
   WorkFlowFactory.init(getClass.getResource("/workflow").getPath())
   val endTime = System.currentTimeMillis()
   println(s"流程初始化初始化完成${endTime - startTime}毫秒")
-  val workFlow = WorkFlowFactory.get("报批")
+  val workFlow = WorkFlowFactory.get("报批流程")
   workFlow match {
     case Some(flow) => {
       val form = new Form()
-      form.id = 2
+      form.id = 28
       form.name = "test"
-      val node = flow.start("0")
+      form.creator = "张三"
+      val node0 = flow.start("0")
       // 当前状态
       // 当前处理人
       val user = new User()
-      val nextNode = flow.executor(Action(node, form, user, 1, List[Int](1)))
-      println(nextNode)
+      val node1 = flow.executor(Action(node0, form, user, 1, List[Int](1)))
+      node1 match {
+        case Some(nextNode) => {
+          nextNode.actor match {
+            case Some(actor) => {
+              val persons = actor(form)
+              println(s"下一步流程:${nextNode.node.name},执行者:$persons")
+            }
+            case None => println("流程未开始!")
+          }
+          // 进入下一个流程
+          val node2 = flow.start(nextNode.node.step)
+          val node3 = flow.executor(Action(node2, form, user, 1, List[Int](1)))
+          node3 match {
+            case Some(nextNode) => {
+              nextNode.actor match {
+                case Some(actor) => {
+                  val persons = actor(form)
+                  println(s"下一步流程:${nextNode.node.name},执行者:$persons")
+                }
+                case None => println("流程未开始!")
+              }
+              // 进入下一个流程
+              val node4 = flow.start(nextNode.node.step)
+              val node5 = flow.executor(Action(node4, form, user, 1, List[Int](1)))
+              node5 match {
+                case Some(nextNode) => {
+                  nextNode.actor match {
+                    case Some(actor) => {
+                      val persons = actor(form)
+                      println(s"下一步流程:${nextNode.node.name},执行者:$persons")
+                    }
+                    case None => println("流程未开始!")
+                  }
+                }
+                case None => println("流程结束!")
+              }
+
+            }
+            case None => println("流程结束!")
+          }
+
+        }
+        case None => println("流程结束!")
+      }
+
     }
     case None =>
   }
-  
+
 }
