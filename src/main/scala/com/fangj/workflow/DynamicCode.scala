@@ -49,6 +49,28 @@ protected[this] object DynamicCode {
 		|         case e: Exception => false
 		|      }
 	    |  }
+    	|
+    	|}""".stripMargin
+
+  }
+
+  /**
+   * 执行者
+   */
+  def actor(className: String, methodName: String, formName: String): String = {
+
+    s"""|trait FlowActor extends (Any => Either[Boolean, String]) {
+    	|
+      	| def apply(form: Any): Either[Boolean, String] = {
+		|      try {
+    	|		   val clazz = Class.forName("$className")
+		|		   val flowService = clazz.newInstance().asInstanceOf[$className]
+				   Right(flowService.$methodName(form.asInstanceOf[$formName]))
+		|      } catch {
+		|         case e: Exception => Left(false)
+		|      }
+	    |  }
+		|		   
     	|}""".stripMargin
 
   }
@@ -86,6 +108,10 @@ protected[this] object DynamicCode {
       }
       case None => null
     }
+  }
+
+  def main(args: Array[String]) {
+    Console println actor("com.fangj.flowservice.FlowService", "getBaoPiActor", "com.fangj.flowservice.Form")
   }
 
 }
