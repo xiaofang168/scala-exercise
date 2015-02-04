@@ -2,26 +2,26 @@
 <workflow name="报批流程">
 <node name="开始" step="0" class="com.fangj.flowservice.FlowService" method="save" form="com.fangj.flowservice.Form">
 <![CDATA[
- to("1")
+ to("1",getBaoPiActor)
 ]]>
 </node>
-<node name="报批" step="1" class="com.fangj.flowservice.FlowService" method="save" form="com.fangj.flowservice.Form">
+<node name="报批" step="1" class="com.fangj.flowservice.FlowService" method="baopi" form="com.fangj.flowservice.Form">
 <![CDATA[
- to("2")
+ to("2",getShenHeActor)
 ]]>
 </node>
-<node name="审核" step="2" class="com.fangj.flowservice.FlowService" method="save" form="com.fangj.flowservice.Form">
+<node name="审核" step="2" class="com.fangj.flowservice.FlowService" method="shenhe" form="com.fangj.flowservice.Form">
 <![CDATA[
 if(form.id>20){
   to("99")
 }else{
-  to("3")
+  to("3",getXiuGaiActor)
 }
 ]]>
 </node>
-<node name="修改" step="3" class="com.fangj.flowservice.FlowService" method="save" form="com.fangj.flowservice.Form">
+<node name="修改" step="3" class="com.fangj.flowservice.FlowService" method="update" form="com.fangj.flowservice.Form">
 <![CDATA[
- to("1")
+ to("1",getBaoPiActor)
 ]]>
 </node>
 </workflow>
