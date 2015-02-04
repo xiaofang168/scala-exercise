@@ -20,12 +20,17 @@ protected[this] case class Node(name: String, step: String, className: String, m
 /**
  * 节点执行者
  */
-protected[this] case class NodeExecutor(node: Node, process: (Any*) => Boolean, control: Any => String)
+protected[this] case class NodeExecutor(node: Node, process: (Any*) => Boolean, control: Any => String, actor: Option[Any => Either[Boolean, String]])
 
 /**
  * 执行流程动作对象
  */
 case class Action(nodeExecutor: NodeExecutor, formObj: Any, params: Any*)
+
+/**
+ * 执行者对象
+ */
+protected[this] case class FlowActor(step: String, className: String, methodName: String, formName: String)
 
 /**
  * 工作流程实体类
@@ -52,7 +57,7 @@ protected[this] class WorkFlow(val name: String, val nodeExecutors: List[NodeExe
   /**
    * 执行业务操作,返回下一个动作节点
    */
-  def executor(action: Action): NodeExecutor = {
+  def executor(action: Action): Option[NodeExecutor] = {
 
     val nodeExecutor = action.nodeExecutor
     val node = nodeExecutor.node
@@ -65,7 +70,7 @@ protected[this] class WorkFlow(val name: String, val nodeExecutors: List[NodeExe
       val controlStructureEval = nodeExecutor.control
       // 获取下一个流程动作
       val nextStep = controlStructureEval(formObj)
-      if (nextStep.equals("99")) null else start(nextStep)
+      if (nextStep.equals("99")) None else Some(start(nextStep))
     } else {
       throw WorkFlowException("999", s"执行业务操作出错!className:${node.className},methodName:${node.methodName}")
     }
