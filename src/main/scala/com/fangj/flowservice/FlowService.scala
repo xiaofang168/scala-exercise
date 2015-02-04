@@ -22,4 +22,37 @@ class FlowService {
     0
   }
 
+  @Process(paramTypes = Array[String]("com.fangj.flowservice.User", "Int", "List[Int]"))
+  def update(user: User, id: Int, list: List[Int]): Int = {
+    println("执行修改!")
+    0
+  }
+
+  @Process(paramTypes = Array[String]("com.fangj.flowservice.User", "Int", "List[Int]"))
+  def baopi(user: User, id: Int, list: List[Int]): Int = {
+    println("执行报批!")
+    0
+  }
+
+  @Process(paramTypes = Array[String]("com.fangj.flowservice.User", "Int", "List[Int]"))
+  def shenhe(user: User, id: Int, list: List[Int]): Int = {
+    println("执行审核!")
+    0
+  }
+
+  /**
+   * 获取报批执行者
+   */
+  def getBaoPiActor(form: Form): String = {
+    form.creator
+  }
+
+  def getXiuGaiActor(form: Form): String = {
+    form.creator
+  }
+
+  def getShenHeActor(form: Form): String = {
+    "部门经理"
+  }
+
 }
