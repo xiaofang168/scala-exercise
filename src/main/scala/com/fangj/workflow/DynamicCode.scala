@@ -97,21 +97,43 @@ protected[this] object DynamicCode {
 
   }
 
+  /**
+   * 反射获取方法参数类型
+   */
   private def getMethodParamTypes(classInstance: Any, methodName: String) = {
     var methods = classInstance.getClass().getMethods()
     val m = methods.find { e => methodName.equals(e.getName()) }
     m match {
       case Some(m) => {
         val params = m.getParameterTypes()
-        val process = m.getAnnotation(classOf[Process])
-        process.paramTypes()
+        if (params.length > 0) {
+          val process = m.getAnnotation(classOf[Process])
+          if (process == null) {
+            //使用反射机制获取
+            m.getParameterTypes.map(e => {
+              if (isWrapClass(e)) e.getName().capitalize else {
+                if (!e.getName().contains("collection")) e.getName() else throw WorkFlowException("", s"类${classInstance.getClass}方法${methodName}参数包含了集合类型,请使用@Process进行注解!")
+              }
+            })
+          } else {
+            process.paramTypes()
+          }
+        } else {
+          throw WorkFlowException("", s"类${classInstance.getClass}方法${methodName}未设置参数!")
+        }
       }
-      case None => null
+      case None => throw WorkFlowException("", s"类${classInstance.getClass}方法${methodName}不存在!")
     }
   }
 
   def main(args: Array[String]) {
-    Console println actor("com.fangj.flowservice.FlowService", "getBaoPiActor", "com.fangj.flowservice.Form")
+    // Console println actor("com.fangj.flowservice.FlowService", "getBaoPiActor", "com.fangj.flowservice.Form")
+    val clazz = Class.forName("com.fangj.flowservice.FlowService")
+    getMethodParamTypes(clazz.newInstance(), "approve").foreach(println)
+
   }
 
+  def isWrapClass(clz: Class[_]) = {
+    clz.isPrimitive()
+  }
 }
