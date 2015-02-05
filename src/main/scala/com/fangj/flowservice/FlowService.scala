@@ -40,6 +40,12 @@ class FlowService {
     0
   }
 
+  @Process(paramTypes = Array[String]("com.fangj.flowservice.User", "Int", "List[Int]"))
+  def end(user: User, id: Int, list: List[Int]): Int = {
+    println("流程结束!")
+    0
+  }
+
   /**
    * 获取报批执行者
    */
