@@ -32,7 +32,7 @@ object WorkFlowFactory {
   }
 
   /**
-   * 实例化流程
+   * 根据xml文件内容实例化流程
    */
   private def instanceWorkFlow(xml: String): WorkFlow = {
     val wf = scala.xml.XML.loadString(xml)
@@ -80,6 +80,7 @@ object WorkFlowFactory {
     }
   }
 
+  // 工作流程结合
   private var workFlows: Map[String, WorkFlow] = _
 
   /**
@@ -147,6 +148,9 @@ object WorkFlowFactory {
     })
   }
 
+  /**
+   * 根据node正文获取执行者方法名称
+   */
   private def getActorMethod(step: String, body: String): String = {
     val mathToMethodRegex = """to\(.*\)""".r
     val mathToParamTegex = """to\((.*)\)""".r
