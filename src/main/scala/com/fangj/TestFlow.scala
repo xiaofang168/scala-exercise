@@ -40,7 +40,10 @@ object TestFlow extends App {
       node1 match {
         case Some(nextNode) => {
           nextNode.actor match {
-            case Some(actor) => {
+            case Some(actors) => {
+              val className = node0.node.className
+              val formName = node0.node.formName
+              val actor = actors(className + formName)
               val persons = actor(form)
               println(s"下一步流程:${nextNode.node.name},执行者:$persons")
             }
@@ -52,7 +55,10 @@ object TestFlow extends App {
           node3 match {
             case Some(nextNode) => {
               nextNode.actor match {
-                case Some(actor) => {
+                case Some(actors) => {
+                  val className = node0.node.className
+                  val formName = node0.node.formName
+                  val actor = actors(className + formName)
                   val persons = actor(form)
                   println(s"下一步流程:${nextNode.node.name},执行者:$persons")
                 }
@@ -64,7 +70,10 @@ object TestFlow extends App {
               node5 match {
                 case Some(nextNode) => {
                   nextNode.actor match {
-                    case Some(actor) => {
+                    case Some(actors) => {
+                      val className = node0.node.className
+                      val formName = node0.node.formName
+                      val actor = actors(className + formName)
                       val persons = actor(form)
                       println(s"下一步流程:${nextNode.node.name},执行者:$persons")
                     }
