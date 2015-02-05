@@ -126,14 +126,15 @@ protected[this] object DynamicCode {
     }
   }
 
+  def isWrapClass(clz: Class[_]) = {
+    clz.isPrimitive()
+  }
+  
   def main(args: Array[String]) {
     // Console println actor("com.fangj.flowservice.FlowService", "getBaoPiActor", "com.fangj.flowservice.Form")
     val clazz = Class.forName("com.fangj.flowservice.FlowService")
     getMethodParamTypes(clazz.newInstance(), "approve").foreach(println)
 
   }
-
-  def isWrapClass(clz: Class[_]) = {
-    clz.isPrimitive()
-  }
+  
 }
