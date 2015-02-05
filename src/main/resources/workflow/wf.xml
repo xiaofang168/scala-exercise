@@ -24,4 +24,5 @@ if(form.id>20){
  to("1",getBaoPiActor)
 ]]>
 </node>
+<node name="结束" step="99" class="com.fangj.flowservice.FlowService" method="end" form="com.fangj.flowservice.Form"/>
 </workflow>
