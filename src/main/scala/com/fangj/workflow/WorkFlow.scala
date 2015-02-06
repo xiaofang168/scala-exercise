@@ -55,6 +55,32 @@ protected[this] class WorkFlow(val name: String, val nodeExecutors: List[NodeExe
   }
 
   /**
+   * 通过任务号开启流程(数据库业务操作)
+   */
+  def start(taskId: Int, formObj: Any, params: Any*) {
+    // 如果taskId为0则插入新数据
+    if (taskId == 0) {
+      val startNodeExecutor = start("0")
+      // 获取formObj中的流程号
+      if (formObj.isInstanceOf[FlowForm]) {
+        val flowForm = formObj.asInstanceOf[FlowForm]
+        val flowNum = flowForm.flowNum
+        if (flowNum != null && !flowNum.isEmpty()) {
+          // 插入数据库
+        } else {
+          throw WorkFlowException("", s"开启流程表单未设置流程编号!")
+        }
+      } else {
+        throw WorkFlowException("", s"开启流程表单未继承FLowForm!")
+      }
+    } else {
+      // 去数据库查询对应的流程信息
+
+      // 根据任务id查找当前状态,不存在则抛异常
+    }
+  }
+
+  /**
    * 执行业务操作,返回下一个动作节点
    */
   def executor(action: Action): Option[NodeExecutor] = {
