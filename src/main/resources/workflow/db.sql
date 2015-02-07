@@ -12,7 +12,7 @@ CREATE TABLE `flow_task` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-/*表： flow_execution(存放流程执行信息)*/-----------------------
+/*表： flow_hist_task(存放任务历史信息)*/-----------------------
 CREATE TABLE `flow_execution` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `flow_name` varchar(50) DEFAULT NULL COMMENT '流程名称',
