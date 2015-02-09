@@ -15,12 +15,12 @@ import com.twitter.util.Eval
 /**
  * 流程动作节点
  */
-protected[this] case class Node(name: String, step: String, className: String, methodName: String, formName: String, body: String)
+private[workflow] case class Node(name: String, step: String, className: String, methodName: String, formName: String, body: String)
 
 /**
  * 节点执行者
  */
-protected[this] case class NodeExecutor(node: Node, process: (Any*) => Boolean, control: Option[Any => String], actor: Option[Map[String, Any => Either[Boolean, String]]])
+private[workflow] case class NodeExecutor(node: Node, process: (Any*) => Boolean, control: Option[Any => String], actor: Option[Map[String, Any => Either[Boolean, String]]])
 
 /**
  * 执行流程动作对象
@@ -30,7 +30,7 @@ case class Action(nodeExecutor: NodeExecutor, formObj: Any, params: Any*)
 /**
  * 执行者对象
  */
-protected[this] case class FlowActor(step: String, className: String, methodName: String, formName: String)
+private[workflow] case class FlowActor(step: String, className: String, methodName: String, formName: String)
 
 /**
  * 工作流程实体类
@@ -38,7 +38,7 @@ protected[this] case class FlowActor(step: String, className: String, methodName
  * @Date: 2015年2月2日 上午10:39:07
  * @version: $Rev$
  */
-protected[this] class WorkFlow(val name: String, val nodeExecutors: List[NodeExecutor]) {
+class WorkFlow(val name: String, val nodeExecutors: List[NodeExecutor]) {
 
   /**
    * 根据状态(步骤)返回当前动作节点
