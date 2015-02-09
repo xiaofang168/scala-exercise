@@ -135,7 +135,7 @@ object WorkFlowFactory {
       val body = e.body
       // 获取执行者方法
       val method = getActorMethod(step, body)
-      className + "+" + formName -> FlowActor(step, className, method, formName)
+      className + formName -> FlowActor(step, className, method, formName)
     }) toMap
   }
 
@@ -160,7 +160,7 @@ object WorkFlowFactory {
     val method: String = toMethodList.filter(_.contains("to(\"" + step + "\""))(0)
     val mathToParamTegex(paramStr) = method
     val params = paramStr.split(",")
-    if (params.length > 0) params(1) else ""
+    if (params.length > 1) params(1) else ""
   }
 
   /**
