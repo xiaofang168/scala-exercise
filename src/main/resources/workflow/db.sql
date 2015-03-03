@@ -1,4 +1,4 @@
-/*表： flow_task(存放需要完成的任务信息)*/------------------
+/*表： flow_task(存放需要完成的任务信息) 表单表加入流程实例id(流程号)*/------------------
 CREATE TABLE `flow_task` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `flow_name` varchar(50) DEFAULT NULL COMMENT '流程名称',
