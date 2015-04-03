@@ -16,11 +16,11 @@ javacOptions ++= Seq("-encoding", "UTF-8", "-source", "1.6", "-target", "1.6")
 
 compileOrder := CompileOrder.JavaThenScala
 
-externalResolvers := Resolver.withDefaultResolvers(resolvers.value, mavenCentral = false)
+//externalResolvers := Resolver.withDefaultResolvers(resolvers.value, mavenCentral = false)
 
-resolvers ++= Seq(
-      "oschina" at "http://maven.oschina.net/content/groups/public"
-)
+//resolvers ++= Seq(
+//      "oschina" at "http://maven.oschina.net/content/groups/public"
+//)
 
 libraryDependencies ++= {
   Seq(
@@ -28,6 +28,9 @@ libraryDependencies ++= {
 	"com.twitter"      %%  	   "util-eval"       % "6.12.1" withSources(),
 	"io.spray" 			  %%   "spray-json"    % "1.2.6" withSources(),
 	"org.apache.pdfbox" %      "pdfbox"          % "1.8.8",
-	"org.mongodb" %% "casbah" % "2.8.0"
-  )
+	"org.mongodb" %% "casbah-query"% "2.8.0",
+	"org.mongodb" %% "casbah-core"% "2.8.0",
+	"org.mongodb" %% "casbah-gridfs"% "2.8.0",
+  "org.mongodb" %% "casbah-commons"% "2.8.0"
+	)
 }
