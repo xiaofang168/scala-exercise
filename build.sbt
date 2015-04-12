@@ -31,6 +31,6 @@ libraryDependencies ++= {
 	"org.mongodb" %% "casbah-query"% "2.8.0",
 	"org.mongodb" %% "casbah-core"% "2.8.0",
 	"org.mongodb" %% "casbah-gridfs"% "2.8.0",
-  "org.mongodb" %% "casbah-commons"% "2.8.0"
+    "org.mongodb" %% "casbah-commons"% "2.8.0"
 	)
 }
