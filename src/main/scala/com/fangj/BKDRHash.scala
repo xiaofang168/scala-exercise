@@ -6,7 +6,6 @@
  */
 package com.fangj
 
-import scala.annotation.tailrec
 
 /**
  * @ClassName: BKDRHash
@@ -30,7 +29,7 @@ object BKDRHash {
     hash & 0x7FFFFFFF
   }
 
-  @tailrec
+  @scala.annotation.tailrec
   private def hash(h: Int, chars: List[Char]): Int = {
     if (!chars.isEmpty) {
       val seed = 131
