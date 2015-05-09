@@ -12,7 +12,7 @@ package com.fangj.fun
  * @Date: 2014年7月29日 下午12:19:08
  * @version: $Rev$
  */
-object NumberSplit extends Application {
+object NumberSplit extends App {
   val count = 101
   val pageList = for (i <- 1 to count if (i % 100 == 0)) yield (i)
   val list: List[Int] = (1 to count) toList

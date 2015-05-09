@@ -14,7 +14,7 @@ package com.fangj.fun
  * @time: 下午4:47:55
  * @version: V1.0
  */
-object ScalaPersonParallel extends Application {
+object ScalaPersonParallel extends App {
   def msort[T](list: List[T])(fn: (T, T) => Boolean): List[T] = {
     //辅助函数，合并两个有序List
     def merge(xs: List[T], ys: List[T]): List[T] = (xs, ys) match {

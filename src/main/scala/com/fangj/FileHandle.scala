@@ -2,7 +2,7 @@ package com.fangj
 
 import scala.io.Source
 
-import spray.json._
+import _root_.spray.json._
 import DefaultJsonProtocol._
 import java.nio.file.{ Paths, Files }
 import java.nio.charset.StandardCharsets

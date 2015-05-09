@@ -19,7 +19,7 @@ import ExecutionContext.Implicits.global
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
-object ScalaFuture extends Application {
+object ScalaFuture extends App {
 
   val f1 = Future[String] {
     "Hello" + "World"
