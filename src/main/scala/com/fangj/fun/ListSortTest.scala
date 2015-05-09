@@ -16,7 +16,7 @@ import scala.math.Ordering
  */
 case class Row(var firstName: String, var lastName: String, var city: String)
 
-object ListSortTest extends Application {
+object ListSortTest extends App {
 
   var rows = List(new Row("Oscar", "1", "London"),
     new Row("Otto", "5", "Berlin"),

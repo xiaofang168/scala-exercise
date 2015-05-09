@@ -29,7 +29,7 @@ case class Point(val x: Double, val y: Double) {
   def /(d: Double) = new Point(this.x / d, this.y / d)
   def pointLength = math.sqrt(x * x + y * y)
   def distance(that: Point) = (this - that).pointLength
-  override def toString = format("(%.3f, %.3f)", x, y)
+  override def toString = ("%.3f, %.3f") format (x, y)
 }
 
 object LocalKMeans {
@@ -70,7 +70,7 @@ object LocalKMeans {
     val newCentroids = centroids.map(oldCentroid => {
       clusters.get(oldCentroid) match {
         case Some(pointsInCluster) => pointsInCluster.reduceLeft(_ + _) / pointsInCluster.length
-        case None => oldCentroid
+        case None                  => oldCentroid
       }
     })
     //  计算新质心相对与旧质心的偏移量

@@ -8,6 +8,7 @@ package com.fangj
 
 import scala.annotation.tailrec
 
+
 /**
  * 快速算法的原理
  * @ClassName: QuickSort
