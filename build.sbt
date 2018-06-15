@@ -25,6 +25,7 @@ compileOrder := CompileOrder.JavaThenScala
 //)
 
 libraryDependencies ++= {
+  val akkaVersion = "2.4.19"
   Seq(
     "com.twitter" %% "util-eval" % "6.24.0" withSources(),
     "io.spray" %% "spray-json" % "1.2.6" withSources(),
@@ -34,6 +35,11 @@ libraryDependencies ++= {
     "org.mongodb" %% "casbah-gridfs" % "2.8.0",
     "org.mongodb" %% "casbah-commons" % "2.8.0",
     "org.typelevel" %% "cats-core" % "1.1.0",
-    "org.scala-lang.modules" % "scala-xml_2.11" % "1.0.5"
+    "org.scala-lang.modules" % "scala-xml_2.11" % "1.0.5",
+    "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+    "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+    "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion,
+    "com.typesafe.akka" %% "akka-distributed-data-experimental" % akkaVersion,
+    "com.typesafe.akka" %% "akka-typed-experimental" % akkaVersion
   )
 }
