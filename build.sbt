@@ -34,10 +34,12 @@ libraryDependencies ++= {
     "org.mongodb" %% "casbah-core" % "2.8.0",
     "org.mongodb" %% "casbah-gridfs" % "2.8.0",
     "org.mongodb" %% "casbah-commons" % "2.8.0",
+    "joda-time" % "joda-time" % "2.9.9",
     "org.typelevel" %% "cats-core" % "1.1.0",
     "org.scala-lang.modules" % "scala-xml_2.11" % "1.0.5",
     "com.typesafe.akka" %% "akka-actor" % akkaVersion,
     "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+    "com.typesafe.akka" %% "akka-http" % "10.0.11",
     "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion,
     "com.typesafe.akka" %% "akka-distributed-data-experimental" % akkaVersion,
     "com.typesafe.akka" %% "akka-typed-experimental" % akkaVersion
