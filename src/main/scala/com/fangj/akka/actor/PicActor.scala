@@ -33,11 +33,11 @@ class PicActor extends Actor {
         os.write(buffer, 0, bytesRead);
         bytesRead = is.read(buffer, 0, 8192)
       }
-      return true;
+      true
     } catch {
       case e: Exception => {
         e.printStackTrace()
-        return false;
+        false
       }
     }
   }
