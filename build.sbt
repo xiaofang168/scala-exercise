@@ -18,11 +18,11 @@ javacOptions ++= Seq("-encoding", "UTF-8", "-source", "1.8", "-target", "1.8")
 
 compileOrder := CompileOrder.JavaThenScala
 
-//externalResolvers := Resolver.withDefaultResolvers(resolvers.value, mavenCentral = false)
+externalResolvers := Resolver.withDefaultResolvers(resolvers.value, mavenCentral = false)
 
-//resolvers ++= Seq(
-//      "oschina" at "http://maven.oschina.net/content/groups/public"
-//)
+resolvers ++= Seq(
+  "aliyun" at "https://maven.aliyun.com/repository/public"
+)
 
 libraryDependencies ++= {
   val akkaVersion = "2.4.19"
