@@ -47,6 +47,7 @@ libraryDependencies ++= {
     "com.github.scullxbones" %% "akka-persistence-mongo-casbah" % "2.3.2",
     "org.iq80.leveldb" % "leveldb" % "0.7",
     "org.fusesource.leveldbjni" % "leveldbjni-all" % "1.8",
-    "com.twitter" %% "chill-akka" % "0.8.0" //事件序列化依赖
+    "com.twitter" %% "chill-akka" % "0.8.0", //事件序列化依赖
+    "org.jsoup" % "jsoup" % "1.12.1"
   )
 }
