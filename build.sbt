@@ -25,7 +25,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= {
-  val akkaVersion = "2.4.19"
+  val akkaVersion = "2.5.21"
   Seq(
     "com.twitter" %% "util-eval" % "6.24.0" withSources(),
     "io.spray" %% "spray-json" % "1.2.6" withSources(),
@@ -41,7 +41,12 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-stream" % akkaVersion,
     "com.typesafe.akka" %% "akka-http" % "10.0.11",
     "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion,
-    "com.typesafe.akka" %% "akka-distributed-data-experimental" % akkaVersion,
-    "com.typesafe.akka" %% "akka-typed-experimental" % akkaVersion
+    "com.typesafe.akka" %% "akka-distributed-data-experimental" % "2.4.20",
+    "com.typesafe.akka" %% "akka-typed-experimental" % "2.4.20",
+    "com.typesafe.akka" %% "akka-persistence" % akkaVersion,
+    "com.github.scullxbones" %% "akka-persistence-mongo-casbah" % "2.3.2",
+    "org.iq80.leveldb" % "leveldb" % "0.7",
+    "org.fusesource.leveldbjni" % "leveldbjni-all" % "1.8",
+    "com.twitter" %% "chill-akka" % "0.8.0" //事件序列化依赖
   )
 }
