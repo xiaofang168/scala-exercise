@@ -48,6 +48,9 @@ libraryDependencies ++= {
     "org.iq80.leveldb" % "leveldb" % "0.7",
     "org.fusesource.leveldbjni" % "leveldbjni-all" % "1.8",
     "com.twitter" %% "chill-akka" % "0.8.0", //事件序列化依赖
-    "org.jsoup" % "jsoup" % "1.12.1"
+    "org.jsoup" % "jsoup" % "1.12.1",
+    "com.alibaba" % "fastjson" % "1.2.62",
+    "org.apache.commons" % "commons-lang3" % "3.9",
+    "org.apache.commons" % "commons-text" % "1.8"
   )
 }
