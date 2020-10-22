@@ -1,5 +1,6 @@
 /**
  * Copyright © 2014 fangjie All rights reserved.
+ *
  * @Description:
  * @Title: Test.scala
  * @Prject: test03
@@ -18,6 +19,7 @@ package com.fangj.enumer
  * @version: V1.0
  */
 object Test {
+
   import Items._
 
   def doWhat(color: Value) = {
@@ -26,6 +28,9 @@ object Test {
     else "go"
 
   }
-  def main(args: Array[String]) {
+
+  def main(args: Array[String]): Unit = {
+    println(Category.BANK)
   }
+
 }
