@@ -51,6 +51,7 @@ libraryDependencies ++= {
     "org.jsoup" % "jsoup" % "1.12.1",
     "com.alibaba" % "fastjson" % "1.2.62",
     "org.apache.commons" % "commons-lang3" % "3.9",
-    "org.apache.commons" % "commons-text" % "1.8"
+    "org.apache.commons" % "commons-text" % "1.8",
+    "dev.zio" %% "zio" % "1.0.4"
   )
 }
