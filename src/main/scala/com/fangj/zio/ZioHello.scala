@@ -12,6 +12,7 @@ object ZioHello extends App {
   println(">>>>")
 
   val r: ZIO[Console, Throwable, Int] = ZIO.succeed(42)
+
   // fold同时处理失败和成功
   val b = r.fold(
     f => {
@@ -36,7 +37,7 @@ object ZioHello extends App {
   // 传入R输出环境
   runtime.unsafeRun(program)
 
-  def run(args: List[String]) = {
+  def run(args: List[String]): ZIO[zio.ZEnv, Nothing, ExitCode] = {
     (IO.effect(println("Hello World!")) *> IO.unit.forever).run.exitCode
   }
 
