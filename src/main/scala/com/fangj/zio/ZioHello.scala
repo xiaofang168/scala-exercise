@@ -38,6 +38,9 @@ object ZioHello extends App {
   runtime.unsafeRun(program)
 
   def run(args: List[String]): ZIO[zio.ZEnv, Nothing, ExitCode] = {
+    val goShopping = ZIO.effect(println("Going to the grocery store"))
+    goShopping.exitCode
+
     (IO.effect(println("Hello World!")) *> IO.unit.forever).run.exitCode
   }
 
