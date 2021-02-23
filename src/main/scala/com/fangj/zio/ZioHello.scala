@@ -37,11 +37,31 @@ object ZioHello extends App {
   // 传入R输出环境
   runtime.unsafeRun(program)
 
+
   def run(args: List[String]): ZIO[zio.ZEnv, Nothing, ExitCode] = {
+    val zipped: ZIO[Console, Throwable, (String, Int)] = ZIO.succeed("8").zip(ZIO.succeed(8))
+
+    val b = zipped.fold(
+      _ => {
+        println("fail");
+        0
+      },
+      s => {
+        println(">>>" + s)
+        1
+      }
+    )
+    runtime.unsafeRun(b)
+
     val goShopping = ZIO.effect(println("Going to the grocery store"))
-    goShopping.exitCode
+    runtime.unsafeRun(goShopping)
+
+    // zipRight
+    val helloWorld = ZIO.effect(print("Hello, ")) *> ZIO.effect(print("World!\n"))
+    runtime.unsafeRun(helloWorld)
 
     (IO.effect(println("Hello World!")) *> IO.unit.forever).run.exitCode
+
   }
 
 }
