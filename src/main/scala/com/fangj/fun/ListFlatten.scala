@@ -16,6 +16,8 @@ object ListFlatten {
   def main(args: Array[String]) {
     val list1 = List(1, 3, 5)
     val list2 = List(2, 4, 6)
+    val b = list2.flatMap(x => List(x))
+    println(b)
     val result = List(1, 2).zipWithIndex.map {
       case (el, i) =>
         if (i == 0) list1
