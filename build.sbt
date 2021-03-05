@@ -6,10 +6,6 @@ version := "0.1"
 
 scalaVersion := "2.11.6"
 
-EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource
-
-EclipseKeys.withBundledScalaContainers := false
-
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
 scalacOptions ++= Seq("-encoding", "UTF-8", "-target:jvm-1.8")
@@ -17,12 +13,6 @@ scalacOptions ++= Seq("-encoding", "UTF-8", "-target:jvm-1.8")
 javacOptions ++= Seq("-encoding", "UTF-8", "-source", "1.8", "-target", "1.8")
 
 compileOrder := CompileOrder.JavaThenScala
-
-externalResolvers := Resolver.withDefaultResolvers(resolvers.value, mavenCentral = false)
-
-resolvers ++= Seq(
-  "aliyun" at "https://maven.aliyun.com/repository/public"
-)
 
 libraryDependencies ++= {
   val akkaVersion = "2.5.21"
