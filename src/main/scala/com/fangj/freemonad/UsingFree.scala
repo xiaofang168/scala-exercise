@@ -21,6 +21,12 @@ object User {
   }
 }
 
+/**
+ * <pre>
+ * Free Monad的Interpreter分别实现了算法和运算的分离考虑
+ * 用Monad描述程序算法，用Interpreter解译程序形成针对特定运行环境的可运行代码。
+ * </pre>
+ */
 object UsingFree {
 
   /**
