@@ -11,6 +11,8 @@
 package com.fangj.implic
 
 /**
+ * 限定参数类型
+ *
  * @ClassName: Test03
  * @Description:
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
@@ -19,6 +21,7 @@ package com.fangj.implic
  */
 object Test03 {
   def f[A](a: A)(implicit ev: (Int with String) <:< A) = println("OK")
+
   def main(args: Array[String]) {
     f(2)
     f("ee")
