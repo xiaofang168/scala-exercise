@@ -19,7 +19,7 @@ package com.fangj.implic
  * @date: 下午3:53:35
  * @version: V1.0
  */
-object Test03 {
+object UnionTypeTest {
   def f[A](a: A)(implicit ev: (Int with String) <:< A) = println("OK")
 
   def main(args: Array[String]) {

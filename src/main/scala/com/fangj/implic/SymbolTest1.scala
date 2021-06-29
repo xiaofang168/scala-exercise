@@ -26,12 +26,36 @@ class Pair5[T <% Comparable[T]](val first: T, val second: T) {
 
 object SymbolTest1 {
 
+  type or[L, R] = Either[L, R]
+
+  implicit def l2Or[L, R](l: L): L or R = Left(l)
+
+  implicit def r2Or[L, R](r: R): L or R = Right(r)
+
+  object Bar {
+    def foo(xs: (String or Int)) = xs match {
+      case Left(l) => println("str")
+      case Right(r) => println("int")
+    }
+  }
+
+  /**
+   * 限定参数类型，scala3中使用union types
+   *
+   * @param a
+   * @param ev
+   * @tparam A
+   */
+  def f[A](a: A)(implicit ev: (Int with String) <:< A) = println("OK")
+
   def main(args: Array[String]): Unit = {
     val l: Int = Foo("333").getStringLength
     println(l)
     println(Foo(2).plus)
     val p = new Pair5(4, 2)
     println(p.smaller)
+    Bar.foo(2)
+    Bar.foo(">>>")
   }
 
 }
