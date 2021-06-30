@@ -6,17 +6,13 @@ version := "0.1"
 
 scalaVersion := "2.11.6"
 
-scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
-
-scalacOptions ++= Seq("-encoding", "UTF-8", "-target:jvm-1.8")
-
-javacOptions ++= Seq("-encoding", "UTF-8", "-source", "1.8", "-target", "1.8")
-
-compileOrder := CompileOrder.JavaThenScala
+scalacOptions ++= Seq("-unchecked", "-deprecation", "-encoding", "-Ymacro-annotations", "utf8", "-target:jvm-1.8")
 
 libraryDependencies ++= {
   val akkaVersion = "2.5.21"
-  Seq(
+  Seq(compilerPlugin(
+    "org.scalamacros" %% "paradise" % "2.0.1" cross CrossVersion.full
+  ),
     "com.twitter" %% "util-eval" % "6.24.0" withSources(),
     "io.spray" %% "spray-json" % "1.2.6" withSources(),
     "org.apache.pdfbox" % "pdfbox" % "1.8.8",
@@ -44,6 +40,7 @@ libraryDependencies ++= {
     "org.apache.commons" % "commons-lang3" % "3.9",
     "org.apache.commons" % "commons-text" % "1.8",
     "dev.zio" %% "zio" % "1.0.4",
-    "com.chuusai" %% "shapeless" % "2.3.3"
+    "com.chuusai" %% "shapeless" % "2.3.3",
+    "io.estatico" %% "newtype" % "0.4.4"
   )
 }
