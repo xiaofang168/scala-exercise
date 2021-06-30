@@ -6,13 +6,13 @@ version := "0.1"
 
 scalaVersion := "2.11.6"
 
+val circeVersion = "0.11.2"
+
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-target:jvm-1.8")
 
 libraryDependencies ++= {
   val akkaVersion = "2.5.21"
-  Seq(compilerPlugin(
-    "org.scalamacros" %% "paradise" % "2.0.1" cross CrossVersion.full
-  ),
+  Seq(compilerPlugin("org.scalamacros" %% "paradise" % "2.0.1" cross CrossVersion.full),
     "com.twitter" %% "util-eval" % "6.24.0" withSources(),
     "io.spray" %% "spray-json" % "1.2.6" withSources(),
     "org.apache.pdfbox" % "pdfbox" % "1.8.8",
@@ -41,6 +41,15 @@ libraryDependencies ++= {
     "org.apache.commons" % "commons-text" % "1.8",
     "dev.zio" %% "zio" % "1.0.4",
     "com.chuusai" %% "shapeless" % "2.3.3",
-    "io.estatico" %% "newtype" % "0.4.4"
+    "io.estatico" %% "newtype" % "0.4.4",
+    "eu.timepit" %% "refined" % "0.9.12",
+    "com.softwaremill.common" %% "tagging" % "2.2.1"
   )
 }
+
+libraryDependencies ++= Seq(
+  "io.circe" %% "circe-core",
+  "io.circe" %% "circe-generic",
+  "io.circe" %% "circe-parser",
+  "io.circe" %% "circe-refined"
+).map(_ % circeVersion)
