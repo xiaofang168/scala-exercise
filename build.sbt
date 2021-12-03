@@ -10,6 +10,8 @@ val circeVersion = "0.11.2"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-target:jvm-1.8")
 
+// 请注意，我们正在使用 Scala 2.13.6，我们将需要启用-ymacro-annotation 编译器标志，以便我们能够使用 ZIO 提供的一些宏。
+// 如果你想使用 Scala < 2.13，you’ll need to add the macro paradise compiler plugin
 libraryDependencies ++= {
   val akkaVersion = "2.5.21"
   Seq(compilerPlugin("org.scalamacros" %% "paradise" % "2.0.1" cross CrossVersion.full),
