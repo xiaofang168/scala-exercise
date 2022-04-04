@@ -10,6 +10,8 @@
  */
 package com.fangj.mapreduce
 
+import com.fangj.fun.PipelineOp._
+
 /**
  * @ClassName: Test
  * @Description:
@@ -24,9 +26,12 @@ object Test {
     val add100 = (x: Int) => x + 100
     val sq = (x: Int) => x * x //List(1, 4, 9, 16, 25)
     val add1List = foo map add1
-    //sq(add1(x)) 
+    //sq(add1(x))
     val sqComposeAdd1 = sq compose add1
-    foo map sqComposeAdd1
+    
+    // pipeline 管道函数调用
+    (foo map sqComposeAdd1) ->> println
+
     foo map add1 map sq map add100
     val asq = foo map (add100 compose sq compose add1)
     //List(2, 3,4, 5, 6)
