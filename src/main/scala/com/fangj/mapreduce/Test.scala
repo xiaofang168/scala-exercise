@@ -20,6 +20,7 @@ import com.fangj.fun.PipelineOp._
  * @version: V1.0
  */
 object Test {
+
   def main(args: Array[String]) {
     val foo = 1 to 5 toList
     val add1 = (x: Int) => x + 1
@@ -27,8 +28,10 @@ object Test {
     val sq = (x: Int) => x * x //List(1, 4, 9, 16, 25)
     val add1List = foo map add1
     //sq(add1(x))
+    // 使用管道替换
+    add1(2) ->> sq ->> println
     val sqComposeAdd1 = sq compose add1
-    
+
     // pipeline 管道函数调用
     (foo map sqComposeAdd1) ->> println
 
@@ -43,7 +46,6 @@ object Test {
     f.foreach(println(_))
     foo map (add1 andThen sq andThen add100)
     foo map (fncs reduce (_ andThen _))
-
   }
 
 }
