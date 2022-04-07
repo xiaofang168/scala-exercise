@@ -10,6 +10,9 @@ val circeVersion = "0.11.2"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-target:jvm-1.8")
 
+// 应对java混写，可以在idea中编译scala选项中设置
+compileOrder := CompileOrder.JavaThenScala
+
 // 请注意，我们正在使用 Scala 2.13.6，我们将需要启用-ymacro-annotation 编译器标志，以便我们能够使用 ZIO 提供的一些宏。
 // 如果你想使用 Scala < 2.13，you’ll need to add the macro paradise compiler plugin
 libraryDependencies ++= {
@@ -45,7 +48,11 @@ libraryDependencies ++= {
     "com.chuusai" %% "shapeless" % "2.3.3",
     "io.estatico" %% "newtype" % "0.4.4",
     "eu.timepit" %% "refined" % "0.9.12",
-    "com.softwaremill.common" %% "tagging" % "2.2.1"
+    "com.softwaremill.common" %% "tagging" % "2.2.1",
+    "com.alibaba" % "easyexcel" % "3.0.5",
+    "org.json4s" %% "json4s-jackson" % "4.0.3",
+    "commons-io" % "commons-io" % "2.8.0",
+    "org.projectlombok" % "lombok" % "1.18.12" % "provided"
   )
 }
 
