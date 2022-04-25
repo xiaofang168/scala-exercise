@@ -52,6 +52,7 @@ libraryDependencies ++= {
     "com.alibaba" % "easyexcel" % "3.0.5",
     "org.json4s" %% "json4s-jackson" % "4.0.3",
     "commons-io" % "commons-io" % "2.8.0",
+    "org.apache.httpcomponents" % "httpclient" % "4.5.13",
     "org.projectlombok" % "lombok" % "1.18.12" % "provided"
   )
 }
@@ -60,5 +61,6 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-core",
   "io.circe" %% "circe-generic",
   "io.circe" %% "circe-parser",
-  "io.circe" %% "circe-refined"
+  "io.circe" %% "circe-refined",
+  "io.circe" %% "circe-generic-extras"
 ).map(_ % circeVersion)
