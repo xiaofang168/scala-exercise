@@ -4,7 +4,7 @@ organization := "com.fangj"
 
 version := "0.1"
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.12.6"
 
 val circeVersion = "0.11.2"
 
@@ -17,18 +17,17 @@ compileOrder := CompileOrder.JavaThenScala
 // 如果你想使用 Scala < 2.13，you’ll need to add the macro paradise compiler plugin
 libraryDependencies ++= {
   val akkaVersion = "2.5.21"
-  Seq(compilerPlugin("org.scalamacros" %% "paradise" % "2.0.1" cross CrossVersion.full),
-    "com.twitter" %% "util-eval" % "6.24.0" withSources(),
-    "io.spray" %% "spray-json" % "1.2.6" withSources(),
+  Seq(compilerPlugin("org.scalamacros" %% "paradise" % "2.1.1" cross CrossVersion.full),
+    "com.twitter" %% "util-eval" % "6.43.0" withSources(),
+    "io.spray" %% "spray-json" % "1.3.6" withSources(),
     "org.apache.pdfbox" % "pdfbox" % "1.8.8",
-    "org.mongodb" %% "casbah-query" % "2.8.0",
-    "org.mongodb" %% "casbah-core" % "2.8.0",
-    "org.mongodb" %% "casbah-gridfs" % "2.8.0",
-    "org.mongodb" %% "casbah-commons" % "2.8.0",
+    "org.mongodb" %% "casbah-query" % "3.1.1",
+    "org.mongodb" %% "casbah-core" % "3.1.1",
+    "org.mongodb" %% "casbah-gridfs" % "3.1.1",
+    "org.mongodb" %% "casbah-commons" % "3.1.1",
     "joda-time" % "joda-time" % "2.9.9",
     "org.typelevel" %% "cats-core" % "2.0.0",
     "org.typelevel" %% "cats-free" % "2.0.0",
-    "org.scala-lang.modules" % "scala-xml_2.11" % "1.0.5",
     "com.typesafe.akka" %% "akka-actor" % akkaVersion,
     "com.typesafe.akka" %% "akka-stream" % akkaVersion,
     "com.typesafe.akka" %% "akka-http" % "10.0.11",
@@ -39,7 +38,7 @@ libraryDependencies ++= {
     "com.github.scullxbones" %% "akka-persistence-mongo-casbah" % "2.3.2",
     "org.iq80.leveldb" % "leveldb" % "0.7",
     "org.fusesource.leveldbjni" % "leveldbjni-all" % "1.8",
-    "com.twitter" %% "chill-akka" % "0.8.0", //事件序列化依赖
+    "com.twitter" %% "chill-akka" % "0.10.0", //事件序列化依赖
     "org.jsoup" % "jsoup" % "1.12.1",
     "com.alibaba" % "fastjson" % "1.2.62",
     "org.apache.commons" % "commons-lang3" % "3.9",
