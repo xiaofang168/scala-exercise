@@ -2,6 +2,7 @@ package com.fangj.http
 
 
 import io.circe.generic.auto._
+import io.circe.generic.extras.{Configuration, ConfiguredJsonCodec}
 import io.circe.syntax._
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
@@ -10,13 +11,26 @@ import org.apache.http.util.EntityUtils
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 
+final case class SourceData(count: Int, time: String)
+
+final case class BizExt(count: Int)
+
+final case class CommitBatchData(day: String, rc: SourceData, packages: List[SourceData], fa: SourceData, ip: String)
+
+@ConfiguredJsonCodec
+case class CommitData(source: String, ext: String, createTime: Long, ip: String)
+
+object CommitData {
+  implicit val customConfig: Configuration = Configuration.default.withSnakeCaseMemberNames
+}
 
 object DataCommitApp {
 
-  val batchData = CommitBatchData("2022-04-21", SourceData(1000, "20:10"),
-    List(SourceData(100, "21:10"), SourceData(200, "21:20"),
-      SourceData(250, "21:20"), SourceData(100, "21:30")),
-    SourceData(350, "22:10"), "172.30.176.9")
+  val batchData = CommitBatchData("2022-04-19",
+    SourceData(2000, "20:10"),
+    List(SourceData(200, "21:10"), SourceData(200, "21:20"), SourceData(200, "21:20"), SourceData(300, "21:30")),
+    SourceData(200, "22:10"),
+    "172.30.176.9")
 
   def main(args: Array[String]): Unit = {
     // 入催
