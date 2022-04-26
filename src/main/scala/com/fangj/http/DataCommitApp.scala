@@ -52,13 +52,16 @@ object DataCommitApp {
   }
 
   def doPost(url: String, json: String): String = {
-    val client = HttpClients.createDefault
-    val httpPost = new HttpPost(url)
-    httpPost.addHeader("Content-Type", "application/json;charset=utf-8")
-    httpPost.setEntity(new StringEntity(json, "utf-8"))
-    val resp = client.execute(httpPost)
-    val respEntity = resp.getEntity
-    EntityUtils.toString(respEntity, "UTF-8")
+    import scala.util.Using
+
+    Using.resource(HttpClients.createDefault) { client =>
+      val httpPost = new HttpPost(url)
+      httpPost.addHeader("Content-Type", "application/json;charset=utf-8")
+      httpPost.setEntity(new StringEntity(json, "utf-8"))
+      val resp = client.execute(httpPost)
+      val respEntity = resp.getEntity
+      EntityUtils.toString(respEntity, "UTF-8")
+    }
   }
 
 }
