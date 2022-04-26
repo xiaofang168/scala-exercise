@@ -6,11 +6,11 @@ abstract class Animal {
 
   //def eat(food: SuitableFood)
 
-  def eat[T <: Food](food: T)
+  def eat[T <: Food](food: T): Unit
 }
 class Grass extends Food
 
 class Cow extends Animal {
   type SuitableFood = Grass
-  override def eat[Grass](food: Grass) {}
+  override def eat[Grass](food: Grass): Unit = {}
 }

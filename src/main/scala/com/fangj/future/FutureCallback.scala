@@ -6,9 +6,8 @@
  */
 package com.fangj.future
 
-import scala.concurrent.Future
-import scala.concurrent.{ ExecutionContext, Promise }
-import ExecutionContext.Implicits.global
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
@@ -25,7 +24,7 @@ object FutureCallback extends App {
     chf <- futrue2
   } yield usd + chf
   val f = future1.flatMap { x => futrue2.map { y => x + y } }
-  f.onSuccess { case e => println(e) }
-  purchase.onSuccess { case e => println(e) }
+  f foreach { case e => println(e) }
+  purchase foreach { case e => println(e) }
   Thread.sleep(15)
 }

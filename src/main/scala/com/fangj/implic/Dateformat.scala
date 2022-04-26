@@ -21,7 +21,7 @@ class RichDate(d: Date) {
 
 object Dateformat {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     implicit def toRichDate(d: Date) = new RichDate(d)
     // 方式一
     val d = new Date()

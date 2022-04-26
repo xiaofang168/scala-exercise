@@ -27,7 +27,7 @@ case class BarPlugin(
  * @tparam A
  */
 trait Updateable[A] {
-  def updatePlugin(self: A, p: A)
+  def updatePlugin(self: A, p: A): Unit
 }
 
 object Updateable {

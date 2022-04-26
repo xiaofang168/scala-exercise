@@ -20,7 +20,7 @@ class HtmlActor extends Actor {
       }
 
       // 通知 JianActor 来创建一个新的HtmlActor解析 next，如果调用自己的话就是在同一个线程中执行，会阻塞
-      sender ! next
+      sender() ! next
 
       // download
       val comments = body.select("ol.commentlist li")
@@ -36,7 +36,7 @@ class HtmlActor extends Actor {
                 imgsrc = "http://" + imgsrc.substring(2)
               }
               // 一个下载一个actor处理，最大化利用CPU
-              val downactor = context.actorOf(Props[PicActor]);
+              val downactor = context.actorOf(Props[PicActor]());
               downactor ! imgsrc
             }
           }

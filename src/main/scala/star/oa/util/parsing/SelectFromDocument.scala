@@ -13,10 +13,6 @@ package star.oa.util.parsing
  * @time: 下午7:30:26
  * @version: V1.0
  */
-
-
-package star.oa.util
-
 /*import star.oa.Document
 import star.oa.DocumentItemGroup
 import star.oa.Item
@@ -46,3 +42,11 @@ sel.from match {
 }
 }
 */
+
+object Sfd {
+
+  def main(args: Array[String]): Unit = {
+    println(">>")
+  }
+
+}

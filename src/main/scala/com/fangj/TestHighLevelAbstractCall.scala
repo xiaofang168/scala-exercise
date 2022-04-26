@@ -18,7 +18,7 @@ object TestHighLevelAbstractCall {
 
   def averageDamp(f: Double => Double)(x: Double) = x
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     a(x => x + 1)(2)
     // return fun is use one param 
     a(averageDamp(x => x + 2))(2)

@@ -5,7 +5,6 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.headers.RawHeader
 import akka.http.scaladsl.unmarshalling.Unmarshal
-import akka.stream.ActorMaterializer
 import com.fangj.mongodb.JrqJsonProtocol._
 import com.mongodb.casbah.Imports.MongoClient
 import com.mongodb.casbah.commons.MongoDBObject
@@ -15,13 +14,12 @@ import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 /**
-  * @author fangjie
-  * @date Created in 下午12:01 18/7/17.
-  */
-object HandleJrqCashData extends App {
+ * @author fangjie
+ * @date Created in 下午12:01 18/7/17.
+ */
+object HandleJrqCashData {
 
   implicit val system = ActorSystem()
-  implicit val materializer = ActorMaterializer()
   // needed for the future flatMap/onComplete in the end
   implicit val executionContext = system.dispatcher
 
@@ -61,10 +59,13 @@ object HandleJrqCashData extends App {
                       coll.insert(cash)
                     })
                   }
+                  case None => print("nothing...")
                 }
               }
+              case _ => println("nothing...")
             }
           }
+          case _ => println("nothing...")
         }
       }
       case Failure(_) => sys.error("something wrong")

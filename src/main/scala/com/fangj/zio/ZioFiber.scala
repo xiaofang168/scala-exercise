@@ -1,8 +1,8 @@
 package com.fangj.zio
 
+import zio._
 import zio.clock.Clock
 import zio.duration._
-import zio.{UIO, console, _}
 
 /**
  * 使用了插件隐式转换输出zio值
@@ -21,22 +21,22 @@ object ZioFiber extends zio.App {
 
   def sequentialWakeUpRoutine(): ZIO[zio.ZEnv, Nothing, Unit] =
     for {
-      _ <- bathTime.debug
-      _ <- boilingWater.debug
-      _ <- preparingCoffee.debug
+      _ <- bathTime.debug()
+      _ <- boilingWater.debug()
+      _ <- preparingCoffee.debug()
     } yield ()
 
   def concurrentBathroomTimeAndBoilingWater(): ZIO[zio.ZEnv, Nothing, Unit] = for {
-    _ <- bathTime.debug.fork
-    _ <- boilingWater.debug
+    _ <- bathTime.debug().fork
+    _ <- boilingWater.debug()
   } yield ()
 
   def concurrentWakeUpRoutine(): ZIO[zio.ZEnv, Nothing, Unit] = for {
-    bathFiber <- bathTime.debug.fork
-    boilingFiber <- boilingWater.debug.fork
+    bathFiber <- bathTime.debug().fork
+    boilingFiber <- boilingWater.debug().fork
     zippedFiber = bathFiber.zip(boilingFiber)
     result <- zippedFiber.join.debug()
-    _ <- ZIO.succeed(s"$result...done").debug() *> preparingCoffee.debug
+    _ <- ZIO.succeed(s"$result...done").debug() *> preparingCoffee.debug()
   } yield ()
 
 
@@ -48,35 +48,35 @@ object ZioFiber extends zio.App {
     for {
       _ <- bathTime.debug()
       boilingFiber <- fork
-      _ <- aliceCalling.debug.fork *> boilingFiber.interrupt.debug
-      _ <- ZIO.succeed("Going to the Cafe with Alice").debug
+      _ <- aliceCalling.debug().fork *> boilingFiber.interrupt.debug()
+      _ <- ZIO.succeed("Going to the Cafe with Alice").debug()
     } yield ()
   }
 
   def concurrentWakeUpRoutineWithAliceCallingUsTooLate(): ZIO[zio.ZEnv, Nothing, Unit] = {
-    val uninterruptible: ZIO[Clock, Nothing, Fiber.Runtime[Any, String]] = preparingCoffeeWithSleep.debug.fork.uninterruptible
+    val uninterruptible: ZIO[Clock, Nothing, Fiber.Runtime[Any, String]] = preparingCoffeeWithSleep.debug().fork.uninterruptible
     for {
       _ <- bathTime.debug()
       _ <- boilingWater.debug()
       coffeeFiber <- uninterruptible
       result <- aliceCalling.debug().fork *> coffeeFiber.interrupt.debug()
       _ <- result match {
-        case Exit.Success(value) => ZIO.succeed("Making breakfast at home").debug
-        case _ => ZIO.succeed("Going to the Cafe with Alice").debug
+        case Exit.Success(value) => ZIO.succeed("Making breakfast at home").debug()
+        case _ => ZIO.succeed("Going to the Cafe with Alice").debug()
       }
     } yield ()
   }
 
   override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] =
-    sequentialWakeUpRoutine.exitCode *>
+    sequentialWakeUpRoutine().exitCode *>
       console.putStrLn("异步执行") *>
-      concurrentBathroomTimeAndBoilingWater.exitCode *>
+      concurrentBathroomTimeAndBoilingWater().exitCode *>
       console.putStrLn("异步后同步") *>
-      concurrentWakeUpRoutine.exitCode *>
+      concurrentWakeUpRoutine().exitCode *>
       console.putStrLn("异常中断") *>
-      concurrentWakeUpRoutineWithAliceCall.exitCode *>
+      concurrentWakeUpRoutineWithAliceCall().exitCode *>
       console.putStrLn("完美中断") *>
-      concurrentWakeUpRoutineWithAliceCallingUsTooLate.exitCode
+      concurrentWakeUpRoutineWithAliceCallingUsTooLate().exitCode
 
 }
 

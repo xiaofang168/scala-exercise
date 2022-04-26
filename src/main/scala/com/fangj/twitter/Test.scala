@@ -18,7 +18,7 @@ import scala.io.Codec
  * @version: V1.0
  */
 object Test {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val file = new File(getClass().getResource("/Mod.scala").getPath())
     def text = Source.fromFile(file)(Codec.UTF8).mkString
     println(text)
