@@ -9,21 +9,22 @@ package com.fangj
 /**
  * Streams are like list
  * but they tailored evaluated only on demand
+ *
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
  * @Date: 2015年1月21日
  * @version: $Rev$
  */
 object StreamTest {
 
-  def streamRange(lo: Int, hi: Int): Stream[Int] = {
-    println(lo + " ")
-    if (lo >= hi) Stream.Empty
+  def streamRange(lo: Int, hi: Int): LazyList[Int] = {
+    println(s"${lo}")
+    if (lo >= hi) LazyList.empty
     // x :: xs always produces a list,never a stream
     // x #:: xs == Stream.cons(x,xs)
-    else Stream.cons(lo, streamRange(lo + 1, hi))
+    else LazyList.cons(lo, streamRange(lo + 1, hi))
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     streamRange(1, 10).take(3).toList
   }
 

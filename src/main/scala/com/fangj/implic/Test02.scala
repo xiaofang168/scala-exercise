@@ -20,8 +20,8 @@ package com.fangj.implic
 object Test02 {
   //A =:= B  //表示A类型等同于B类型
   //A <:< B  //表示A类型是B类型的子类型
-  def test[T](i: T)(implicit ev: T <:< java.io.Serializable) { print("OK") }
-  def main(args: Array[String]) {
+  def test[T](i: T)(implicit ev: T <:< java.io.Serializable): Unit = { print("OK") }
+  def main(args: Array[String]): Unit = {
     test("22")
   }
 }

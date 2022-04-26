@@ -3,8 +3,8 @@ package com.fangj.akka.college
 import akka.actor.{Actor, Props}
 import com.alibaba.fastjson.{JSON, JSONArray}
 
-import scala.collection.JavaConverters._
 import scala.io.Source
+import scala.jdk.CollectionConverters._
 
 class CrawlerActor extends Actor {
 
@@ -16,7 +16,7 @@ class CrawlerActor extends Actor {
       val mapTypes = JSON.parse(json).asInstanceOf[java.util.Map[String, JSONArray]]
       val map: Map[String, JSONArray] = mapTypes.asScala.toMap
       map.foreach(e => {
-        val cityActor = context.actorOf(Props[CityActor]);
+        val cityActor = context.actorOf(Props[CityActor]());
         cityActor ! Province(e._1, e._2)
       })
     }

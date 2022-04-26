@@ -13,7 +13,7 @@ package com.fangj.regex
  * @version: $Rev$
  */
 object RegexTest2 {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val Step = """to\((.*)\)""".r
 
     val Name = """to\((".*")\)""".r

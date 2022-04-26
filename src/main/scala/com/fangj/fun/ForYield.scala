@@ -14,24 +14,24 @@ package com.fangj.fun
  * @version: V1.0
  */
 object ForYield {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val map = Map("sort" -> "+id,age-")
     val sort = (for ((k, v) <- map if k contains "sort") yield ({
       (for {
         field <- v.toString.split(",")
-        val s = if (field.toString.contains("-")) " desc" else " asc"
+        s = if (field.toString.contains("-")) " desc" else " asc"
       } yield field.toString.replaceAll("\\-|\\+", "") + s) mkString (",")
 
-    } foldLeft ("order by "))((a, b) => a + b)) mkString ("")
+    } foldLeft ("order by ")) ((a, b) => a + b)) mkString ("")
 
     Console println (sort)
-    aa
-    bb
-    cc
+    aa()
+    bb()
+    cc()
   }
 
   //习惯性的拆分关注点,不像虾爬子(代码长得跟虾耙子一样,十只脚抓了10个关注点，逻辑不清晰)
-  def aa() {
+  def aa(): Unit = {
     //不想把函数定义成val，定义成def也行
     val sortItem: String => String = in => in.replaceAll("[+-]$", "") + (if (in.endsWith("-")) " desc" else " asc")
     val sortItems: String => String = _.split(",") map sortItem mkString (", ")
@@ -41,24 +41,23 @@ object ForYield {
   }
 
   // 整合的写法
-  def bb() {
+  def bb(): Unit = {
     val map = Map("sort" -> "id,age-")
     val sort = map.get("sort") map {
       _.split(",") map {
-        (in) =>
-          {
-            in.replaceAll("[+-]$", "") + (if (in.endsWith("-")) " desc" else " asc")
-          }
+        (in) => {
+          in.replaceAll("[+-]$", "") + (if (in.endsWith("-")) " desc" else " asc")
+        }
       } mkString (", ")
     } map ("order by " + _) getOrElse ""
 
     println(sort)
   }
 
-  def cc() {
+  def cc(): Unit = {
     val m = Map[String, String]("sort" -> "id+,age-", "id" -> "1", "age" -> "20")
     val parseSort: Map[String, String] => String = _.get("sort") getOrElse ("")
-    val whereField: Map[String, String] => Map[String, String] = _.filterKeys(!_.contains("sort"))
+    val whereField: Map[String, String] => Map[String, String] = _.filter(x => x._1.contains("sort"))
     val joinOpField: Map[String, String] => Iterable[String] = for ((k: String, v: String) <- _) yield (k + "=" + v)
 
     Console println parseSort(m)

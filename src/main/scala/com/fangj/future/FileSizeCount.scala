@@ -11,7 +11,7 @@ import scala.concurrent._
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import java.util.regex.Pattern
-import scala.Array.canBuildFrom
+import scala.language.postfixOps
 
 /**
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
@@ -20,7 +20,7 @@ import scala.Array.canBuildFrom
  */
 object FileSizeCount {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println(getFilesSize("D:/dev-tools/ext-docs-5.0/images/", "\\.(gif|png|jpg)$") / 1024)
   }
 

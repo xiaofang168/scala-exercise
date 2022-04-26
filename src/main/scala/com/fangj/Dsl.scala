@@ -21,7 +21,7 @@ import java.util.Date
 object Dsl {
   case class Twitter(id: Long, text: String, publishedAt: Option[java.util.Date])
   
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
    /* var twitters = Twitter(1, "hello scala", Some(new Date())) ::
       Twitter(2, "I like scala tour", None) :: Nil
       var json = ("twitters"

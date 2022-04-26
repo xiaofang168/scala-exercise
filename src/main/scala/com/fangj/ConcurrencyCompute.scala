@@ -9,7 +9,7 @@
  * @version: V1.0
  */
 package com.fangj
-
+import scala.collection.parallel.CollectionConverters._
 /**
  * @ClassName: ConcurrencyCompute
  * @Description:
@@ -18,7 +18,8 @@ package com.fangj
  * @version: V1.0
  */
 object ConcurrencyCompute {
-  def main(args: Array[String]) {
+
+  def main(args: Array[String]): Unit = {
     val urls = List("http://www.baidu.com",
       "http://www.csdn.net",
       "http://www.cnblogs.com/anrainie/archive/2012/03/09/2387272.html")
@@ -33,4 +34,5 @@ object ConcurrencyCompute {
     //urls.map(fromURL(_))
     println("time: " + (System.currentTimeMillis - t) + "ms")
   }
+  
 }
