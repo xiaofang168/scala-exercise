@@ -57,7 +57,7 @@ object DatabaseConverter {
     case _ => value.toString()
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val value = StringConverterObject("333", java.sql.Types.INTEGER)
     val gc = new GregorianCalendar
     val str = ObjectConverterString(new Timestamp(gc.getTime().getTime()), Types.DATE)

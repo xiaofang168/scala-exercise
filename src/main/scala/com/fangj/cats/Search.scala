@@ -8,12 +8,12 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
 /**
-  * Cats（用于函数式编程的 Scala 库）可让您连接两个 Future，有效地并行运行它们
-  * https://www.ibm.com/developerworks/cn/cloud/library/cl-model-first-microservices-scala-cats/index.html
-  *
-  * @author fangjie
-  * @date Created in 下午5:34 18/8/17.
-  */
+ * Cats（用于函数式编程的 Scala 库）可让您连接两个 Future，有效地并行运行它们
+ * https://www.ibm.com/developerworks/cn/cloud/library/cl-model-first-microservices-scala-cats/index.html
+ *
+ * @author fangjie
+ * @date Created in 下午5:34 18/8/17.
+ */
 case class Author(id: Long, name: String)
 
 case class Publication(id: Long, authorId: Long, title: String)
@@ -35,7 +35,7 @@ object Search {
   // this allows you to invoke the companion object as "Result"
   val Result = EitherT
 
-  def findAuthor(query: String): Future[Long] = {
+  def findAuthor(query: String): Future[Int] = {
     Future {
       2
     }
@@ -65,11 +65,11 @@ object Search {
   }
 
   /**
-    * Future 倍增：Cats 和 Semigroupal 类型
-    *
-    * @param query
-    * @return
-    */
+   * Future 倍增：Cats 和 Semigroupal 类型
+   *
+   * @param query
+   * @return
+   */
   def findPublicationsCat(query: String): Future[AuthorPublications] = {
     for {
       authorId <- findAuthor(query)
@@ -93,12 +93,12 @@ object Search {
 
   def main(args: Array[String]): Unit = {
     val query = "test"
-    val search: Future[Unit] = findPublications(query) map { authorPubs =>
+    val search: Future[Future[Unit]] = findPublications(query) map { authorPubs =>
       Future {
         println(s"Found $authorPubs")
       }
     }
-    findAuthorEither("test") map { idOrError => idOrError map { id => println(id + ">>>>") } }
+    findAuthorEither("test") map { idOrError => idOrError map { id => println(s"${id}>>>>") } }
     Await.result(search, Duration.Inf)
   }
 

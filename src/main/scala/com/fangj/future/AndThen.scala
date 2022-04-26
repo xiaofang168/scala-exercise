@@ -6,12 +6,13 @@
  * created at: 2014年8月8日
  */
 package com.fangj.future
-import scala.concurrent.future
+import scala.concurrent.Future
 import scala.concurrent.{ ExecutionContext, Promise }
 import ExecutionContext.Implicits.global
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.util.Success
+import scala.language.postfixOps
 
 /**
  * Controlling flow with Scala Futures
@@ -20,15 +21,15 @@ import scala.util.Success
  * @version: $Rev$
  */
 object AndThen {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
-    future {
+    Future {
       Thread.sleep(500)
       Console.println("Wham!")
       1000
     } andThen {
       case Success(e) => {
-        future {
+        Future {
           println(e)
           Thread.sleep(500)
           Console.println("Bam!")

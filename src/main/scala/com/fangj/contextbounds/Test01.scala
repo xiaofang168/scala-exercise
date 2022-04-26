@@ -27,7 +27,7 @@ object Test01 {
   implicit val c = new Comparator[Int] {
     override def compare(a: Int, b: Int) = a - b
   }
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     Console println max(3, 5)
   }
 }

@@ -130,7 +130,7 @@ protected[this] object DynamicCode {
     clz.isPrimitive()
   }
   
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     // Console println actor("com.fangj.flowservice.FlowService", "getBaoPiActor", "com.fangj.flowservice.Form")
     val clazz = Class.forName("com.fangj.flowservice.FlowService")
     getMethodParamTypes(clazz.newInstance(), "approve").foreach(println)

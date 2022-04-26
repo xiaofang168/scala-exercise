@@ -1,23 +1,43 @@
 package star.oa.util.parsing
+
 import scala.util.parsing.combinator._
-import scala.util.matching.Regex
 
 case class Table(name: String, alias: Option[String])
+
 case class Join(tableName: String, alias: Option[String], leftTable: String, leftField: String, rightTable: String, rightField: String)
+
 case class Column(table: Option[String] = None,
-  field: Option[String] = None,
-  formula: Option[String] = None,
-  asTitle: Option[String] = None) {
+                  field: Option[String] = None,
+                  formula: Option[String] = None,
+                  asTitle: Option[String] = None) {
   lazy val title = asTitle orElse field getOrElse "--"
 }
+
 case class Formula(text: String)
+
 case class Condition(left: String, op: Op, right: String)
+
 abstract class Op
-case object Gt extends Op { def format = ">" }
-case object Gte extends Op { def format = ">=" }
-case object Lt extends Op { def format = "<" }
-case object Lte extends Op { def format = "<=" }
-case object Eq extends Op { def format = "=" }
+
+case object Gt extends Op {
+  def format = ">"
+}
+
+case object Gte extends Op {
+  def format = ">="
+}
+
+case object Lt extends Op {
+  def format = "<"
+}
+
+case object Lte extends Op {
+  def format = "<="
+}
+
+case object Eq extends Op {
+  def format = "="
+}
 
 case class Select(columns: List[Column], from: Option[Table], joins: List[Join], where: List[Condition])
 
@@ -43,6 +63,7 @@ class SqlParser extends JavaTokenParsers {
 
   def tableAndField: Parser[Column] = ident ~ "." ~ ident ^^ {
     case table ~ "." ~ field => Column(table = Some(table), field = Some(field))
+    case _ => Column()
   }
 
   def fieldName: Parser[Column] = ident ^^ {
@@ -80,10 +101,11 @@ class SelectParser extends SqlParser {
   }
 
   def from: Parser[Table] = FROM_ ~> table
-  
+
   def join: Parser[Join] =
     JOIN_ ~> ident ~ opt(AS_ ~> ident) ~ ON_ ~ ident ~ "." ~ ident ~ "=" ~ ident ~ "." ~ ident ^^ {
       case tableName ~ optAlias ~ on ~ leftTable ~ "." ~ leftField ~ "=" ~ rightTable ~ "." ~ rightField =>
         Join(tableName, optAlias, leftTable, leftField, rightTable, rightField)
+      case _ => null
     }
 }

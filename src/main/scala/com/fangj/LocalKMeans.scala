@@ -19,31 +19,37 @@ import scala.util.Random
 
 object Point {
   def random() = {
-    new Point(math.random * 50, math.random * 50)
+    new Point(math.random() * 50, math.random() * 50)
   }
 }
 
 case class Point(val x: Double, val y: Double) {
   def +(that: Point) = new Point(this.x + that.x, this.y + that.y)
+
   def -(that: Point) = new Point(this.x - that.x, this.y - that.y)
+
   def /(d: Double) = new Point(this.x / d, this.y / d)
+
   def pointLength = math.sqrt(x * x + y * y)
+
   def distance(that: Point) = (this - that).pointLength
-  override def toString = ("%.3f, %.3f") format (x, y)
+
+  override def toString = ("%.3f, %.3f") format(x, y)
 }
 
 object LocalKMeans {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val knumbers = 3
     val rand = new Random()
 
     val path = this.getClass().getResource("/kmeans_data.txt").getPath()
     //  读取文本数据
-    val lines = Source.fromFile(path).getLines.toArray
+    val lines = Source.fromFile(path).getLines().toSeq
+
     val points = lines.map(line => {
       val parts = line.split("\t").map(_.toDouble)
       new Point(parts(0), parts(1))
-    }).toArray
+    })
 
     //  随机初始化k个质心
     val centroids = new Array[Point](knumbers)
@@ -54,7 +60,7 @@ object LocalKMeans {
     println("initialize centroids:\n" + centroids.mkString("\n") + "\n")
     println("test points: \n" + points.mkString("\n") + "\n")
 
-    val resultCentroids = kmeans(points, centroids, 0.001)
+    val resultCentroids = kmeans(points, centroids.toSeq, 0.001)
 
     val endTime = System.currentTimeMillis()
     val runTime = endTime - startTime
@@ -70,7 +76,7 @@ object LocalKMeans {
     val newCentroids = centroids.map(oldCentroid => {
       clusters.get(oldCentroid) match {
         case Some(pointsInCluster) => pointsInCluster.reduceLeft(_ + _) / pointsInCluster.length
-        case None                  => oldCentroid
+        case None => oldCentroid
       }
     })
     //  计算新质心相对与旧质心的偏移量

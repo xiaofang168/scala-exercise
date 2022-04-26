@@ -22,7 +22,10 @@ class Rational(n: Int, d: Int) {
   val numer: Int = n
   val denom: Int = d
   Console println ">>>"
+
   def this(n: Int) = this(n, 1)
-  override def toString = numer + "/" + denom
+
+  override def toString = s"${numer}/${denom}"
+
   def add(that: Rational): Rational = new Rational(numer * that.denom + that.numer * denom, denom * that.denom)
 }

@@ -1,14 +1,11 @@
 package com.fangj.excel
 
-import akka.util.ByteString.UTF_8
 import com.alibaba.excel.EasyExcelFactory
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.serializer.SerializerFeature
-import org.apache.commons.io.FileUtils
 import org.apache.commons.lang3.StringUtils
 
-import java.io.File
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 object ReadExcel {
 
@@ -62,9 +59,11 @@ object ReadExcel {
           .build()
     } toList
 
+    settingsList.foreach(e => println(e.getProject))
+
     // 写入json文件
-    FileUtils.writeStringToFile(new File("/Users//inspection.json"), JSON.toJSONString(settingsList.asJava, SerializerFeature.PrettyFormat), UTF_8)
-    prettyJson(settingsList.asJava)
+    //FileUtils.writeStringToFile(new File("/Users//inspection.json"), JSON.toJSONString(settingsList.asJava, SerializerFeature.PrettyFormat), UTF_8)
+    //prettyJson(settingsList.asJava)
   }
 
   def prettyJson(`object`: Any): Unit = {
