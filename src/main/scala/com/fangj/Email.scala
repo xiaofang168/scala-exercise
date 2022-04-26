@@ -26,7 +26,7 @@ object Email {
       case _ => None
     }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     "hbxffj@163.com" match {
       case Email(user, domain) => println(user + "@" + domain)
     }

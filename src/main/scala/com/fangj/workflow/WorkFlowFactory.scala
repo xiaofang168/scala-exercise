@@ -7,10 +7,10 @@
  */
 package com.fangj.workflow
 
-import scala.io.Source
-import java.io.File
-import java.io.FileInputStream
 import com.twitter.util.Eval
+
+import java.io.File
+import scala.io.Source
 import scala.xml.Elem
 
 /**
@@ -41,38 +41,37 @@ object WorkFlowFactory {
     val flowActors = getfLowActors(nodes)
     try {
       val nodeExecutorList: List[NodeExecutor] = nodes.map {
-        node =>
-          {
-            // 流程节点
-            val n = Node(node.name, node.step, node.className, node.methodName, node.formName, node.body)
-            // 执行流程处理
-            val processText = DynamicCode.process(node.className, node.methodName)
-            val processEval = (new Eval).apply[(Any*) => Boolean](s"$processText \n new ClassExecutor {}")
-            if (node.body.isEmpty()) {
-              NodeExecutor(n, processEval, None, None)
-            } else {
-              // 只保留跳转的节点号
-              val replaceNotToRegex = """,.*\)""".r
-              val body = replaceNotToRegex.replaceAllIn(node.body, ")")
-              // 控制
-              val controlStructureText = DynamicCode.controlStructure(node.formName, body)
-              val controlStructureEval = (new Eval).apply[(Any) => String](s"$controlStructureText \n new FlowControlStructure {}")
-              // 流程执行者
-              val actorEvals = flowActors.get(node.step) match {
-                case Some(actor) => {
-                  val actorMap = actor.map {
-                    case (classAndform, actor) => {
-                      val actorText = DynamicCode.actor(actor.className, actor.methodName, actor.formName)
-                      classAndform -> (new Eval).apply[Any => Either[Boolean, String]](s"$actorText \n new FlowActor {}")
-                    }
-                  }.toMap
-                  Some(actorMap)
-                }
-                case None => None
+        node => {
+          // 流程节点
+          val n = Node(node.name, node.step, node.className, node.methodName, node.formName, node.body)
+          // 执行流程处理
+          val processText = DynamicCode.process(node.className, node.methodName)
+          val processEval = (new Eval).apply[(Seq[Any]) => Boolean](s"$processText \n new ClassExecutor {}")
+          if (node.body.isEmpty()) {
+            NodeExecutor(n, processEval, None, None)
+          } else {
+            // 只保留跳转的节点号
+            val replaceNotToRegex = """,.*\)""".r
+            val body = replaceNotToRegex.replaceAllIn(node.body, ")")
+            // 控制
+            val controlStructureText = DynamicCode.controlStructure(node.formName, body)
+            val controlStructureEval = (new Eval).apply[(Any) => String](s"$controlStructureText \n new FlowControlStructure {}")
+            // 流程执行者
+            val actorEvals = flowActors.get(node.step) match {
+              case Some(actor) => {
+                val actorMap = actor.map {
+                  case (classAndform, actor) => {
+                    val actorText = DynamicCode.actor(actor.className, actor.methodName, actor.formName)
+                    classAndform -> (new Eval).apply[Any => Either[Boolean, String]](s"$actorText \n new FlowActor {}")
+                  }
+                }.toMap
+                Some(actorMap)
               }
-              NodeExecutor(n, processEval, Some(controlStructureEval), actorEvals)
+              case None => None
             }
+            NodeExecutor(n, processEval, Some(controlStructureEval), actorEvals)
           }
+        }
       }.toList
       new WorkFlow(workFlowName, nodeExecutorList)
     } catch {
@@ -88,16 +87,15 @@ object WorkFlowFactory {
    */
   private def getfLowActors(nodes: List[Node]): Map[String, Map[String, FlowActor]] = {
     nodes.map {
-      node =>
-        {
-          val className = node.className
-          val formName = node.className
-          val body = node.body
-          val step = node.step
-          val fromNodeList = findNodeByToStep(step, nodes)
-          val nodeActors = getNodeActor(step, fromNodeList)
-          step -> nodeActors
-        }
+      node => {
+        val className = node.className
+        val formName = node.className
+        val body = node.body
+        val step = node.step
+        val fromNodeList = findNodeByToStep(step, nodes)
+        val nodeActors = getNodeActor(step, fromNodeList)
+        step -> nodeActors
+      }
     }.toMap
   }
 
@@ -106,16 +104,15 @@ object WorkFlowFactory {
    */
   private def getAllNode(wf: Elem): List[Node] = {
     (wf \ "node").map {
-      node =>
-        {
-          val name = (node \ "@name").text
-          val step = (node \ "@step").text
-          val className = (node \ "@class").text
-          val methodName = (node \ "@method").text
-          val formName = (node \ "@form").text
-          val body = node.text
-          Node(name, step, className, methodName, formName, body)
-        }
+      node => {
+        val name = (node \ "@name").text
+        val step = (node \ "@step").text
+        val className = (node \ "@class").text
+        val methodName = (node \ "@method").text
+        val formName = (node \ "@form").text
+        val body = node.text
+        Node(name, step, className, methodName, formName, body)
+      }
     }.toList
   }
 
@@ -165,9 +162,10 @@ object WorkFlowFactory {
 
   /**
    * 初始化流程
+   *
    * @workFlowDir 流程文件目录路径
    */
-  def init(workFlowDir: String) {
+  def init(workFlowDir: String): Unit = {
     val workFlowFiles = getWorkFlowFiles(workFlowDir)
     workFlows = workFlowFiles.filter(_.getName().endsWith(".xml")).map { e =>
       val workFlow = instanceWorkFlow(readXml(e))
@@ -182,7 +180,7 @@ object WorkFlowFactory {
     workFlows.get(name)
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val xml: String = Source.fromFile(new File("C:\\Users\\fangjie1.HIK\\git\\scala-exercise\\src\\main\\resources\\workflow\\wf.xml")).mkString
     val wf = scala.xml.XML.loadString(xml)
     val nodeList = getAllNode(wf)

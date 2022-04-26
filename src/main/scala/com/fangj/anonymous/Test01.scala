@@ -19,11 +19,11 @@ object Test01 {
     return f(a) + a + b
   }
 
-  def matchs(f: (String) => Boolean) {
+  def matchs(f: (String) => Boolean): Unit = {
     if (f("aa")) Console println ">>>"
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     matchs(_.endsWith("a"))
   }
 }

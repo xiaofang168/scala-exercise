@@ -22,7 +22,7 @@ package com.fangj.implic
 object UnionTypeTest {
   def f[A](a: A)(implicit ev: (Int with String) <:< A) = println("OK")
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     f(2)
     f("ee")
   }

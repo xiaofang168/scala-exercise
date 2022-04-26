@@ -27,7 +27,7 @@ object Test02 {
     case _ => println("__")
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val c = new C
     foo(D(c))
   }

@@ -41,7 +41,7 @@ object LoopBreak {
     List("1", "2")
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     searchIndex(List(), 0, 10000)
   }
 }

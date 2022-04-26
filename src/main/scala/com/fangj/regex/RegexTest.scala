@@ -18,7 +18,7 @@ package com.fangj.regex
  * @version: V1.0
  */
 object RegexTest {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val Name = """(Mr|Mrs|Ms)\. ([A-Z][a-z]+) ([A-Z][a-z]+)""".r
     val smith = "Mr. John Smith"
     val Name(title, first, last) = smith

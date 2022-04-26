@@ -25,7 +25,7 @@ object Worker {
 }
 
 object Job {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     for (i <- 1 to 5) {
       val worker = Worker.GetWorkInstance();
       worker.work()

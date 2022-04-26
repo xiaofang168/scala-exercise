@@ -42,11 +42,11 @@ class BecomeActor extends Actor {
 
 object BecomeActorApp {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val system = ActorSystem("systemActor")
 
-    val becomeActor = system.actorOf(Props[BecomeActor])
+    val becomeActor = system.actorOf(Props[BecomeActor]())
 
     becomeActor ! A
 
