@@ -20,7 +20,7 @@ import scala.util.matching.Regex
 
 object Test03 {
 
-  def aa(s: String) {
+  def aa(s: String): Unit = {
     new Regex("""(.*)@(.*)""")
       .unapplySeq(s).get match {
         case user :: domain :: Nil => println(s"$user  $domain")
@@ -28,7 +28,7 @@ object Test03 {
       }
 
   }
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     aa("hbxffj@163.com")
   }
 }

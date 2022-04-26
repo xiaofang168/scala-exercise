@@ -40,9 +40,10 @@ object BKDRHash {
     } else 0
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val a = BKDRHash("ddhhh")
     val b = BKDRHash2("ddhhh")
     println(a == b)
   }
+
 }

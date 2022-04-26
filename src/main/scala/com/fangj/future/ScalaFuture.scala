@@ -13,11 +13,11 @@ package com.fangj.future
  * @time: 下午10:19:01
  * @version: V1.0
  */
-import scala.concurrent.Future
-import scala.concurrent.{ ExecutionContext, Promise }
-import ExecutionContext.Implicits.global
-import scala.concurrent.Await
+
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
+import scala.language.postfixOps
 
 object ScalaFuture extends App {
 
@@ -36,7 +36,7 @@ object ScalaFuture extends App {
     msg => println(">>>" + msg.get))
 
   // f2 结束才会调用该foreach
-  //f2.foreach(e => println(e + "  f2 结束了"))
+  f2.foreach(e => println(s"${e}  f2 结束了"))
 
   Console println ("Main线程......")
 

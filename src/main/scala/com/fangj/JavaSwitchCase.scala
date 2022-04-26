@@ -24,7 +24,7 @@ object JavaSwitchCase {
     case n: Int if (n > 1) => fibonacci(n - 1) + fibonacci(n - 2)
     case _ => 0
   }
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println(fibonacci(3))
   }
 }

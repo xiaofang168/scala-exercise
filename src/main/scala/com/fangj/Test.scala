@@ -10,10 +10,10 @@
  */
 package com.fangj
 
-import java.io.PrintWriter
-import java.io.File
+import com.fangj.{Rational => r}
+
+import java.io.{File, PrintWriter}
 import scala.collection.mutable.ArrayBuffer
-import com.fangj.{ Rational => r }
 
 /**
  * @ClassName: Test
@@ -26,7 +26,7 @@ object Test {
 
   var assertionsEnabled = true
 
-  val filesHere = (new java.io.File(".")).listFiles
+  val filesHere = new java.io.File(".").listFiles()
 
   def main(args: Array[String]) {
     //filesEnding("abc")
@@ -65,7 +65,7 @@ object Test {
       for (
         (line1, line2) <- Array("1", "2") zip Array("3", "4")
       ) yield line1 + line2)
-    val args=Array("dd","444")
+    val args = Array("dd", "444")
     printArgs(args)
   }
 
@@ -101,6 +101,7 @@ object Test {
   // 特质类的运用（堆叠）
   abstract class IntQueue {
     def get(): Int
+
     def put(x: Int)
   }
 
@@ -118,8 +119,12 @@ object Test {
 
   class BasicIntQueue extends IntQueue {
     private val buf = new ArrayBuffer[Int]
+
     def get() = buf.remove(0)
-    def put(x: Int) { buf += x }
+
+    def put(x: Int) {
+      buf += x
+    }
   }
 
   trait Filtering extends IntQueue {
@@ -129,10 +134,10 @@ object Test {
   }
 
   class ArrayElement(
-    // 请注意，小括号 
-    val contents: Array[String])
-   
- def printArgs(args: Array[String]): Unit = {
-    args.foreach(println) 
+                      // 请注意，小括号
+                      val contents: Array[String])
+
+  def printArgs(args: Array[String]): Unit = {
+    args.foreach(println)
   }
 }

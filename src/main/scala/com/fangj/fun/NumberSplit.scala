@@ -30,9 +30,9 @@ object NumberSplit extends App {
   } yield (Map("offset" -> offset, "limit" -> limit))
   Console println (t)
 
-  page
+  page()
 
-  def page() {
+  def page(): Unit = {
 
     val rowCount = 101
     // page
