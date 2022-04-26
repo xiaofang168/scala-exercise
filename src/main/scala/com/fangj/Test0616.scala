@@ -14,7 +14,7 @@ package com.fangj
  * @version: V1.0
  */
 object Test0616 {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     // Make a list via the companion object factory
     val days = List("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
 

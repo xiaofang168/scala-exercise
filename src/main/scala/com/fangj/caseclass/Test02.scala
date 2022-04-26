@@ -14,7 +14,7 @@ package com.fangj.caseclass
  * @version: V1.0
  */
 object Test02 {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     processItem(List("apple", "ibm"))
     processItem(List("red", "blue", "white"))
     processItem(List("red", "blue", "green"))
@@ -22,13 +22,14 @@ object Test02 {
     processItem(List("apple", "orange", "banana"), List("banana", "pair", "watermelon"): _*)
   }
 
-  def processItem(items: List[String], s: String*) {
+  def processItem(items: List[String], s: String*): Unit = {
     items match {
       case List("apple", "ibm") => println("apple and ibm")
       case List("red", "blue", "white") => println("red and blue and white")
       case List("red", "blue", _*) => println("red and blue ...")
       // @ 为余下的匹配项取个名，后面可以引用到
-      case List("apple", "orange", others @ _*) => println("apple and orange and" + others)
+      case List("apple", "orange", others@_*) => println("apple and orange and" + others)
+      case _ => println("nothing")
     }
 
   }

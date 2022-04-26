@@ -10,6 +10,8 @@
  */
 package com.fangj.manifest
 
+import scala.reflect.runtime.universe._
+
 /**
  * @ClassName: Test01
  * @Description:
@@ -21,20 +23,21 @@ object Test01 {
   //A =:= B  //表示A类型等同于B类型
   //A <:< B  //表示A类型是B类型的子类型
   def foo[T: Manifest](x: List[T]) = {
-    if (manifest[T] <:< manifest[String])
+    if (typeOf[T] <:< typeOf[String])
       println("Hey, this list is full of strings")
     else
       println("Non-stringy list")
   }
 
   import scala.reflect.runtime.universe.TypeTag
+
   def f[A, B](a: A, b: B)(implicit evA: TypeTag[A], evB: TypeTag[B]): Boolean = evA == evB
-  
+
   def manOf[T: Manifest](t: T): Manifest[T] = manifest[T]
-  
-  def main(args: Array[String]) {
+
+  def main(args: Array[String]): Unit = {
     foo(List(3))
- 
+
     println(manOf("3"))
   }
 }

@@ -5,7 +5,6 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.headers.RawHeader
 import akka.http.scaladsl.unmarshalling.Unmarshal
-import akka.stream.ActorMaterializer
 import com.fangj.mongodb.JrqJsonProtocol._
 import spray.json._
 
@@ -13,13 +12,12 @@ import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 /**
-  * @author fangjie
-  * @date Created in 下午6:03 18/7/17.
-  */
-object JrqCheck extends App {
+ * @author fangjie
+ * @date Created in 下午6:03 18/7/17.
+ */
+object JrqCheck {
 
   implicit val system = ActorSystem()
-  implicit val materializer = ActorMaterializer()
   // needed for the future flatMap/onComplete in the end
   implicit val executionContext = system.dispatcher
 
@@ -39,10 +37,13 @@ object JrqCheck extends App {
                   case Some(cashList) => {
                     println("cashList size:" + cashList.size)
                   }
+                  case None => println("nothing...")
                 }
               }
+              case _ => println("nothing...")
             }
           }
+          case _ => println("nothing...")
         }
       }
       case Failure(_) => sys.error("something wrong")

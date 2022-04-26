@@ -8,9 +8,9 @@ package com.fangj
 
 import scala.annotation.tailrec
 
-
 /**
  * 快速算法的原理
+ *
  * @ClassName: QuickSort
  * @Description: TODO
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
@@ -26,7 +26,7 @@ object QuickSort extends App {
   def quickSort(list: List[Int]): List[Int] = list match {
     case Nil => Nil
     case head :: tail => {
-      val (x1, x2) = tail.partition(list.head>);
+      val (x1, x2) = tail.partition(list.head.>);
       quickSort(x1) ::: head :: quickSort(x2)
     }
   }

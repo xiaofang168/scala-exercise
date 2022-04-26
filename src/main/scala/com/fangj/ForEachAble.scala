@@ -19,14 +19,10 @@ package com.fangj
  */
 trait ForEachAble[A] {
   def iterator: java.util.Iterator[A]
+
   def foreach(f: A => Unit) = {
     val iter = iterator
     while (iter.hasNext)
       f(iter.next)
   }
-}
-
-trait JsonAble {
-  def toJson() =
-    scala.util.parsing.json.JSONFormat.defaultFormatter(this)
 }

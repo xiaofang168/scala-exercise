@@ -13,7 +13,7 @@ package com.fangj.fun
  * @version: $Rev$
  */
 object MapFold {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val map = Map("a" -> 40, "b" -> 35, "c" -> 20, "sort" -> "+id,age-")
     Console println map.foldLeft("")((a, t) => a + t._1 + " = " + t._2 + " and ")
     Console println map.foldLeft("")((acc, kv) => acc + kv._1 + kv._2)

@@ -16,14 +16,14 @@ package com.fangj.fun
 case class Display(include: List[String] = List("*"), exclude: List[String] = null, additionalFields: Map[String, String] = null)
 
 object ListFilter {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     // 获取查询列
     val list = List("id", "name", "age", "sex")
     val display = new Display(List("*"), List("name", "age"), Map())
     val result = if (display.exclude == null) display.include else list.filterNot(display.exclude.contains(_))
     Console println result
 
-    val unionList = list.union(List("id"))
+    val unionList = list.concat(List("id"))
     Console println unionList
 
     // 连接查询字段(as)
@@ -37,7 +37,7 @@ object ListFilter {
 
   def getFirstAndLast(list: List[_]) = list match {
 
-    case l1 :: l2 => println(l1 + ">>>" + l2)
+    case l1 :: l2 => println(s"${l1}>>>${l2}")
     case _ => println("not found")
   }
 }

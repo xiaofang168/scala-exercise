@@ -13,7 +13,7 @@ package com.fangj.fun
  * @version: $Rev$
  */
 object ListFlatten {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val list1 = List(1, 3, 5)
     val list2 = List(2, 4, 6)
     val b = list2.flatMap(x => List(x))

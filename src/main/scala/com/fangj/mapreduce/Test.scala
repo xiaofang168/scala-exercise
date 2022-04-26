@@ -21,7 +21,7 @@ import com.fangj.fun.PipelineOp._
  */
 object Test {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val foo = 1 to 5 toList
     val add1 = (x: Int) => x + 1
     val add100 = (x: Int) => x + 100
@@ -39,7 +39,7 @@ object Test {
     val asq = foo map (add100 compose sq compose add1)
     //List(2, 3,4, 5, 6)
     //List(4, 9, 16, 25, 36)
-    //asq.foreach(println(_))
+    asq.foreach(println(_))
     val fncs = List(add100, sq, add1)
     //add1(sq(x))
     val f = foo map (fncs reduce (_ compose _))

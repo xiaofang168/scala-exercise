@@ -6,22 +6,44 @@
  */
 package com.fangj.caseclass
 
+import scala.reflect.runtime.universe._
+
 class MakeFoo[A](implicit manifest: Manifest[A]) {
-  def make: A = manifest.erasure.newInstance.asInstanceOf[A]
+  def make: A = manifest.runtimeClass.asInstanceOf[A]
 }
 
 object Registry {
+
   import scala.reflect.Manifest
 
   private var map = Map.empty[Any, (Manifest[_], Any)]
 
-  def register[T](name: Any, item: T)(implicit m: Manifest[T]) {
+  def register[T](name: Any, item: T)(implicit m: Manifest[T]): Unit = {
     map = map.updated(name, m -> item)
+  }
+
+  import scala.reflect.runtime.universe._
+
+  trait InstanceOfFun[T] {
+    def apply[U: TypeTag](that: U)(implicit t: TypeTag[T]): Boolean
+  }
+
+  def myIsInstanceOf[T] = new InstanceOfFun[T] {
+    def apply[U: TypeTag](that: U)(implicit t: TypeTag[T]) =
+      typeOf[U] <:< typeOf[T]
+  }
+
+  import scala.reflect.runtime.{universe => ru}
+
+  def arrayConformsTo[A: ru.TypeTag](as: Array[_]) = {
+    val mirror = ru.runtimeMirror(getClass.getClassLoader)
+    val classSym = mirror.classSymbol(as.getClass.getComponentType)
+    classSym.toType <:< implicitly[ru.TypeTag[A]].tpe
   }
 
   def get[T](key: Any)(implicit m: Manifest[T]): Option[T] = {
     map get key flatMap {
-      case (om, s) => if (om <:< m) Some(s.asInstanceOf[T]) else None
+      case (om, s) => if (myIsInstanceOf[T](om)) Some(s.asInstanceOf[T]) else None
     }
   }
 }
@@ -35,33 +57,37 @@ object Registry {
  */
 object Test03Map {
 
-  def matchList[T: Manifest](list: List[T]) {
-    if (manifest[T] <:< manifest[String])
+  def matchList[T: Manifest](list: List[T]): Unit = {
+    import scala.reflect.runtime.universe._
+
+    if (typeOf[T] <:< typeOf[String]) {
       println("String list")
-    else (manifest[T] <:< manifest[Int])
-    println("Int list")
+    }
+
+    else if (typeOf[T] <:< typeOf[Int])
+      println("Int list")
   }
 
-  def matchMap[T: Manifest](map: Map[String, T]) {
-    if (manifest[T] <:< manifest[String])
+  def matchMap[T: Manifest](map: Map[String, T]): Unit = {
+    if (typeOf[T] <:< typeOf[String])
       println("String Map")
-    else if (manifest[T] <:< manifest[Int])
+    else if (typeOf[T] <:< typeOf[Int])
       println("Int Map")
-    else if (manifest[T] <:< manifest[List[String]])
+    else if (typeOf[T] <:< typeOf[List[_]])
       println("List Map")
   }
 
-  def matchObject[T: Manifest](o:  T) {
-    if (manifest[T] <:< manifest[String])
+  def matchObject[T: Manifest](o: T): Unit = {
+    if (typeOf[T] <:< typeOf[String])
       println("String obj")
-    else if (manifest[T] <:< manifest[Int])
+    else if (typeOf[T] <:< typeOf[Int])
       println("Int obj")
-    else if (manifest[T] <:< manifest[List[_]])
+    else if (typeOf[T] <:< typeOf[List[_]])
       println("List obj")
   }
 
-  
-  def main(args: Array[String]) {
+
+  def main(args: Array[String]): Unit = {
     val mf = (new MakeFoo[String]).make
     println(mf)
     matchList(List(2))

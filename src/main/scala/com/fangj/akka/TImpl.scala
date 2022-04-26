@@ -1,24 +1,22 @@
 package com.fangj.akka
 
-import java.nio.file.Paths
-
 import akka.actor.ActorSystem
 import akka.stream._
 import akka.stream.scaladsl._
 import akka.util.ByteString
 
+import java.nio.file.Paths
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
 
 /**
-  * @author fangjie
-  * @date Created in 下午6:10 18/6/4.
-  */
+ * @author fangjie
+ * @date Created in 下午6:10 18/6/4.
+ */
 object TImpl extends App {
 
   implicit val system = ActorSystem("QuickStart")
-  implicit val materializer = ActorMaterializer()
   val source = Source(1 to 100)
   source.runForeach(i => println(i))
   val factorials = source.scan(BigInt(1))((acc, next) => acc * next)
