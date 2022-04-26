@@ -29,13 +29,14 @@ object CaseClass {
   def value(in: Expr): Int = in match {
     case FibonacciExpr(0) => 0
     case FibonacciExpr(1) => 1
-    case FibonacciExpr(n) if (n>1) =>
+    case FibonacciExpr(n) if (n > 1) =>
       value(SumExpr(FibonacciExpr(n - 1), FibonacciExpr(n - 2)))
     case SumExpr(a, b) => value(a) + value(b)
     case _ => 0
   }
-  def main(args: Array[String]) {
-    var s =  FibonacciExpr(2)
+
+  def main(args: Array[String]): Unit = {
+    var s = FibonacciExpr(2)
     Console println s.n
     println(value(FibonacciExpr(9)))
   }

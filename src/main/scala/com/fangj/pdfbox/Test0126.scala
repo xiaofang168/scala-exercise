@@ -20,7 +20,7 @@ import java.io.FileInputStream
  * @version: $Rev$
  */
 object Test0126 {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     
   
     val file = new File("d:/aa.pdf")

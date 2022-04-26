@@ -19,21 +19,26 @@ package com.fangj
  */
 
 
-
 object Test2 {
-class Rational2(val n: Int, val d: Int) {
+  class Rational2(val n: Int, val d: Int) {
 
-  require(d != 0)
+    require(d != 0)
 
-  override def toString = n + "/" + d
+    override def toString = s"${n}/${d}"
 
-  def add(a: Rational2): Rational2 =
+    def add(a: Rational2): Rational2 =
 
-    new Rational2(n * a.d + a.n * d, d * a.d)
+      new Rational2(n * a.d + a.n * d, d * a.d)
 
-}
-  implicit def aa(n: Int) = new { def next = n + 1 }
-  def main(args: Array[String]) {
+  }
+
+  class Plus(n: Int) {
+    def next = n + 1
+  }
+
+  implicit def aa(n: Int) = new Plus(n)
+
+  def main(args: Array[String]): Unit = {
 
     val oneHalf = new Rational2(1, 2)
 
@@ -43,23 +48,13 @@ class Rational2(val n: Int, val d: Int) {
 
     println(s)
 
-    val list = new java.util.ArrayList[Int]() with ForEachAble[Int] with JsonAble
-    list.add(1); list.add(2)
+    val list = new java.util.ArrayList[Int]() with ForEachAble[Int]
+    list.add(1);
+    list.add(2)
     list.foreach(println(_))
     //println("Json: " + list.toJson)
-    Console println 2.next
-
-    def getProperty(name: String): Option[String] = {
-      val value = System.getProperty(name)
-      if (value != null) Some(value) else None
-    }
-
-    val osName = getProperty("os.name")
-
-    osName match {
-      case Some(value) => value
-      case _ => "none"
-    }
-    osName.foreach(print _)
+    val b = 2.next
+    println(b)
   }
+
 }

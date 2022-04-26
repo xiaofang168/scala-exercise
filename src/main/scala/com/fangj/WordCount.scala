@@ -18,7 +18,7 @@ package com.fangj
  * @version: V1.0
  */
 object WordCount {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val file = List("warn 2013 msg", "warn 2012 msg",
       "error 2013 msg", "warn 2013 msg")
 

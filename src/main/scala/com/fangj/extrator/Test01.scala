@@ -25,7 +25,7 @@ object TT {
   def unapply(a: A) = Some(new A, new B(new A))
 }
 object Test01 {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val b = new B(new A)
     //TT.unapply(b)  match{ case Some(new A) => }
     b match { case TT(a) => println(a) }

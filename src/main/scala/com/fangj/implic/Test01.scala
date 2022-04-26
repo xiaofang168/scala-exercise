@@ -26,7 +26,7 @@ object StringOrInt {
 
 
 object Test01 {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     Bar.foo("dd")
   }
 }

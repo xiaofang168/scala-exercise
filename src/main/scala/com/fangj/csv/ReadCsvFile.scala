@@ -1,12 +1,11 @@
 package com.fangj.csv
 
-import java.io.{File, PrintWriter}
-
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.serializer.SerializeConfig
 
-import scala.collection.JavaConverters._
+import java.io.{File, PrintWriter}
 import scala.io.Source
+import scala.jdk.CollectionConverters._
 
 
 object ReadCsvFile {
@@ -15,7 +14,7 @@ object ReadCsvFile {
 
   def main(args: Array[String]): Unit = {
     val bufferedSource = Source.fromFile(s"${this.getClass.getResource(".").getPath}/college_csv.csv")
-    val list: List[College] = bufferedSource.getLines.filter(_.split(",").length != 1)
+    val list: List[College] = bufferedSource.getLines().filter(_.split(",").length != 1)
       .map(line => {
         val cols = line.split(",")
         College(cols(0).toLong, cols(1))

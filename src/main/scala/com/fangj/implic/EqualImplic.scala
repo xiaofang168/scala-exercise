@@ -57,7 +57,7 @@ object EqualImplic {
     c.put(c.get(fst), c.get(snd))
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     square(2)
     //(new Container(123)).addIt
     implicit val a = List[Int](3)

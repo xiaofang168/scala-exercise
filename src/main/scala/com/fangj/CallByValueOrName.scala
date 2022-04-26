@@ -26,7 +26,7 @@ object CallByValueOrName {
     f * f
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     square(3, 4)
     square(3 + 4, e("call by value!"))
     aa(3, e("call by name!") + 4)

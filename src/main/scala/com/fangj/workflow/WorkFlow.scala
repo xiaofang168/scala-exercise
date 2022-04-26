@@ -20,7 +20,7 @@ private[workflow] case class Node(name: String, step: String, className: String,
 /**
  * 节点执行者
  */
-private[workflow] case class NodeExecutor(node: Node, process: (Any*) => Boolean, control: Option[Any => String], actor: Option[Map[String, Any => Either[Boolean, String]]])
+private[workflow] case class NodeExecutor(node: Node, process: (Seq[Any]) => Boolean, control: Option[Any => String], actor: Option[Map[String, Any => Either[Boolean, String]]])
 
 /**
  * 执行流程动作对象
@@ -57,7 +57,7 @@ class WorkFlow(val name: String, val nodeExecutors: List[NodeExecutor]) {
   /**
    * 通过任务号开启流程(数据库业务操作)
    */
-  def start(taskId: Int, formObj: Any, params: Any*) {
+  def start(taskId: Int, formObj: Any, params: Any*): Unit = {
     // 如果taskId为0则插入新数据
     if (taskId == 0) {
       val startNodeExecutor = start("0")
