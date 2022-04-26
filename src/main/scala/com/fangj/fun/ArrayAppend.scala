@@ -13,7 +13,7 @@ package com.fangj.fun
  * @version: $Rev$
  */
 object ArrayAppend {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 	  val a = Array(1,2)
 	  val b = Array(3,4)
 	  val c = a++b

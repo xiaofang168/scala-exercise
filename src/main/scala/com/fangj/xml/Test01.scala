@@ -16,20 +16,23 @@ package com.fangj.xml
  * @version: V1.0
  */
 object Test01 {
-  def main(args: Array[String]) {
-    val foo = <foo><bar type="greet">hi</bar><bar type="count">1</bar><bar type="color">yellow</bar></foo>
+  def main(args: Array[String]): Unit = {
+    val foo = <foo>
+      <bar type="greet">hi</bar> <bar type="count">1</bar> <bar type="color">yellow</bar>
+    </foo>
     Console println foo.text
     val s = (foo \ "bar").map(_.text).mkString(" ")
     Console println s
     val a = (foo \ "bar").map(_ \ "@type")
     //a.foreach(Console println _)
     Console println "readStringxml"
-    readString
+    readString()
   }
 
-  def readString() {
+  def readString(): Unit = {
 
-    val fooString = """
+    val fooString =
+      """
       <foo><bar type="greet">hi</bar><bar type="count">1</bar>
       <bar type="color">yellow</bar></foo>
       """

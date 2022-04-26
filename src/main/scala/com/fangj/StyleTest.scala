@@ -21,7 +21,7 @@ object StyleTest {
       if (i == n) a else fibIter(i + 1, b, a + b)
     fibIter(0, 0, 1)
   }
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 	  Console println fib(3)
   }
 }

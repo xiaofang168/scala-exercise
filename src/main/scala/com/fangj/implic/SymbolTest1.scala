@@ -18,11 +18,6 @@ case class Foo[A](a: A) { // 'A' can be substituted with any type
   def plus(implicit evidence: A =:= Int) = a + 2
 }
 
-class Pair5[T <% Comparable[T]](val first: T, val second: T) {
-  def smaller = if (first.compareTo(second) < 0) first else second
-
-  override def toString = "(" + first + "," + second + ")"
-}
 
 object SymbolTest1 {
 
@@ -52,8 +47,6 @@ object SymbolTest1 {
     val l: Int = Foo("333").getStringLength
     println(l)
     println(Foo(2).plus)
-    val p = new Pair5(4, 2)
-    println(p.smaller)
     Bar.foo(2)
     Bar.foo(">>>")
   }

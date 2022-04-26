@@ -18,7 +18,7 @@ import java.util.Date
  * @version: V1.0
  */
 object Test03 {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val c = Calendar.getInstance()
     c.setTime(new Date())
     Console println c.getTime().getTime()

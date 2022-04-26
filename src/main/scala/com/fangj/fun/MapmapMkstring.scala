@@ -13,7 +13,7 @@ package com.fangj.fun
  * @version: $Rev$
  */
 object MapmapMkstring {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val map = Map("a" -> 40, "b" -> 35, "c" -> 20)
     val a = map.map {
       case (k, v) => {

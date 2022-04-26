@@ -30,7 +30,7 @@ class IdProvider extends PersistentActor with ActorLogging {
    */
   override def receiveRecover: Receive = {
     case IdGenerated(id) =>
-      println(id + ">>>")
+      println(s"${id}>>>")
       currentId = id
     case SnapshotOffer(_, snapshot: Int) =>
       // 在快照完整的情况下，Actor优先从快照恢复自身状态

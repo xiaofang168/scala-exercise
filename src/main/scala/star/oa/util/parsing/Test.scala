@@ -14,7 +14,7 @@ package star.oa.util.parsing
  * @version: V1.0
  */
 object Test {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     lazy val parser = new SelectParser()
     val sel =parser.parse(parser.sql, "select name,sex from User u where u.name='a'").get
     

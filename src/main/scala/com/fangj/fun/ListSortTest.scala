@@ -23,11 +23,11 @@ object ListSortTest extends App {
     new Row("Carl", "1", "Paris"),
     new Row("Hans", "7", "Dublin"),
     new Row("Hugo", "2", "Sligo"))
-  //val s = List("10", "3", "8", "0", "2")
-  //val result = (rows.sortBy(r => (r.lastName, r.firstName)))(Ordering.Tuple2(Ordering.String.reverse, Ordering.String))
+  val s = List("10", "3", "8", "0", "2")
+  val result = (rows.sortBy(r => (r.lastName, r.firstName))) (Ordering.Tuple2(Ordering.String.reverse, Ordering.String))
   //val result = s.sortWith(compfn1(_, _))
-  //Console println result
-  aa
+  Console println result
+  aa()
   //rows.sortWith(lt)
 
   /* sort alphabetical and ignoring case */
@@ -36,7 +36,7 @@ object ListSortTest extends App {
   /* sort alphabetical and ignoring case: alternate */
   def compfn2(e1: String, e2: String) = (e1.toLowerCase < e2.toLowerCase)
 
-  def aa() {
+  def aa(): Unit = {
     val sortItems = List("id", "age")
     val result = List(Map[String, String]("id" -> "7", "age" -> "40"), Map[String, String]("id" -> "10", "age" -> "48"), Map[String, String]("id" -> "19", "age" -> "40"))
 
@@ -59,13 +59,13 @@ object ListSortTest extends App {
             case ("double", "double") => {
               (sortMap(e1), sortMap(e2)) match {
                 // 都为降序的情况
-                case ("-", "-") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double.reverse, Ordering.Double.reverse))
+                case ("-", "-") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double.IeeeOrdering, Ordering.Double.IeeeOrdering.reverse))
                 // 都为升序的情况
-                case ("+", "+") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double, Ordering.Double))
+                case ("+", "+") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double.IeeeOrdering, Ordering.Double.TotalOrdering))
                 // 前者升序,后者降序
-                case ("+", "-") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double, Ordering.Double.reverse))
+                case ("+", "-") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double.IeeeOrdering, Ordering.Double.IeeeOrdering))
                 // 前者降序,后者升序
-                case ("-", "+") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double.reverse, Ordering.Double))
+                case ("-", "+") => result.sortBy(m => (m(e1).toDouble, m(e2).toDouble))(Ordering.Tuple2(Ordering.Double.IeeeOrdering, Ordering.Double.IeeeOrdering))
               }
             }
             // 都为字符串的情况
@@ -85,24 +85,24 @@ object ListSortTest extends App {
             case ("double", "string") => {
               (sortMap(e1), sortMap(e2)) match {
                 // 都为降序的情况
-                case ("-", "-") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double.reverse, Ordering.String.reverse))
+                case ("-", "-") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double.IeeeOrdering, Ordering.String.reverse))
                 // 都为升序的情况
-                case ("+", "+") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double, Ordering.String))
+                case ("+", "+") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double.IeeeOrdering, Ordering.String))
                 // 前者升序,后者降序
-                case ("+", "-") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double, Ordering.String.reverse))
+                case ("+", "-") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double.IeeeOrdering, Ordering.String.reverse))
                 // 前者降序,后者升序
-                case ("-", "+") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double.reverse, Ordering.String))
+                case ("-", "+") => result.sortBy(m => (m(e1).toDouble, m(e2)))(Ordering.Tuple2(Ordering.Double.TotalOrdering, Ordering.String))
               }
             }
             // 前者为字符串,后者为数字的情况
             case ("string", "double") => {
               (sortMap(e1), sortMap(e2)) match {
                 // 都为降序的情况
-                case ("-", "-") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String.reverse, Ordering.Double.reverse))
+                case ("-", "-") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String.reverse, Ordering.Double.TotalOrdering))
                 // 前者升序,后者降序
-                case ("+", "-") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String, Ordering.Double.reverse))
+                case ("+", "-") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String, Ordering.Double.TotalOrdering))
                 // 前者降序,后者升序
-                case ("-", "+") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String.reverse, Ordering.Double))
+                case ("-", "+") => result.sortBy(m => (m(e1), m(e2).toDouble))(Ordering.Tuple2(Ordering.String.reverse, Ordering.Double.TotalOrdering))
               }
             }
             case _ => result.sortBy(m => m(e1))

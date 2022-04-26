@@ -24,7 +24,7 @@ class HandAlias {
 
 object HandAlias {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 	  val hand = new HandAlias
 	  Console println hand.plus(3,2)
 	  Console println hand.multiply(5,6)

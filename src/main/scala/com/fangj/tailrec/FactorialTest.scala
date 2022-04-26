@@ -22,7 +22,7 @@ object FactorialTest {
     else factorialTailrec(n - 1, acc * n)
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val result = BigInt("2").pow(12)
     println(result)
   }

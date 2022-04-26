@@ -24,7 +24,7 @@ object Test01 {
   class X; class Y extends X
   val t:C[Y] = new C[X]
   
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val list: List[_] = List("2", 5)
     for (element <- list) {
       Console println element
