@@ -24,6 +24,9 @@ object Test03 {
     c.setTime(new Date())
     Console println c.getTime().getTime()
     multiTable()
+    println()
+    for (a <- 1 to 9; b <- 1 to a) printf("%d*%d=%d%s", a, b, a * b, if (a == b) "\n" else "\t")
+    // for (a <- 1 to 9; b <- 1 to a) print(s"${a}*${b}=${a * b}${if (a == b) "\n" else "\t"}")
   }
 
   def multiTable(): Unit = {
