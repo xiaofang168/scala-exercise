@@ -8,8 +8,8 @@
  */
 package com.fangj
 
-import java.util.Calendar
-import java.util.Date
+import java.util.{Calendar, Date}
+
 /**
  * @ClassName: Test03
  * @Description:
@@ -18,9 +18,22 @@ import java.util.Date
  * @version: V1.0
  */
 object Test03 {
+
   def main(args: Array[String]): Unit = {
     val c = Calendar.getInstance()
     c.setTime(new Date())
     Console println c.getTime().getTime()
+    multiTable()
   }
+
+  def multiTable(): Unit = {
+    for {
+      i <- 1 to 9
+      j <- 1 to i
+      ss = s"$j*$i=${j * i}\t"
+    } yield {
+      if (i == j) s"$ss\n" else ss
+    } foreach print
+  }
+
 }
