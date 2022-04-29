@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: test
  * Description: RegexTestScala.scala
  * created at: 2014年8月18日
@@ -35,7 +33,7 @@ object RegexTestScala extends App {
   val pattern4 = "(S|s)cala".r
   val str4 = "Scala is scalable and cool"
 
-  println(pattern4 replaceFirstIn (str4, "Java"))
+  println(pattern4 replaceFirstIn(str4, "Java"))
 
   Console println """([abc])""".r.replaceAllIn("a b c d e", """'$1'""")
 
