@@ -1,21 +1,18 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: AndThen.scala
  * created at: 2014年8月8日
  */
 package com.fangj.future
+
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-import scala.concurrent.{ ExecutionContext, Promise }
-import ExecutionContext.Implicits.global
-import scala.concurrent.Await
-import scala.concurrent.duration._
-import scala.util.Success
 import scala.language.postfixOps
+import scala.util.Success
 
 /**
  * Controlling flow with Scala Futures
+ *
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
  * @Date: 2014年8月8日 上午9:30:34
  * @version: $Rev$

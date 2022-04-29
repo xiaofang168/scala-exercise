@@ -1,16 +1,9 @@
 /*
- * Copyright 2015 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: WorkFlow.scala
  * created at: 2015年2月2日
  */
 package com.fangj.workflow
-
-import java.io.File
-import scala.io.Source
-import scala.io.Codec
-import com.twitter.util.Eval
 
 /**
  * 流程动作节点
@@ -34,6 +27,7 @@ private[workflow] case class FlowActor(step: String, className: String, methodNa
 
 /**
  * 工作流程实体类
+ *
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
  * @Date: 2015年2月2日 上午10:39:07
  * @version: $Rev$

@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: Test.scala
  * created at: 2014年12月2日
@@ -12,16 +10,20 @@ package com.fangj.toolbox
  * @Date: 2014年12月2日 上午11:16:49
  * @version: $Rev$
  */
+
 import scala.tools.reflect.ToolBox
+
 object Test extends App {
   val tb = scala.reflect.runtime.universe.runtimeMirror(getClass.getClassLoader).mkToolBox()
-  println(tb.parse("""class Counter(n: Int) {
+  println(tb.parse(
+    """class Counter(n: Int) {
   def biggerThan(c: Counter) {
     this.n > c.n
   }
 }"""))
 
-println(tb.parse("""class Counter(n: Int) {
+  println(tb.parse(
+    """class Counter(n: Int) {
   var count = n
   def biggerThan(c: Counter) {
     this.n > c.count
