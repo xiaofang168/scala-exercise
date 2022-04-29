@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: Dateformat.scala
  * created at: 2014年7月11日
@@ -23,13 +21,16 @@ object Dateformat {
 
   def main(args: Array[String]): Unit = {
     implicit def toRichDate(d: Date) = new RichDate(d)
+
     // 方式一
     val d = new Date()
     Console println d.format("yyyy-MM-dd")
+
     // 方式二
     implicit def toRichDate2(d: Date) = {
       def format(s: String) = new SimpleDateFormat(s).format(d)
     }
+
     val d2 = new Date()
     Console println d2.format("yyyy-MM-dd HH-mm-ss")
   }

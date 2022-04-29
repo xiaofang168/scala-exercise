@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: test03
  * Description: HandAlias.scala
  * created at: 2014年7月5日
@@ -25,8 +23,8 @@ class HandAlias {
 object HandAlias {
 
   def main(args: Array[String]): Unit = {
-	  val hand = new HandAlias
-	  Console println hand.plus(3,2)
-	  Console println hand.multiply(5,6)
+    val hand = new HandAlias
+    Console println hand.plus(3, 2)
+    Console println hand.multiply(5, 6)
   }
 }
