@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: MapFold.scala
  * created at: 2014年7月16日
@@ -26,7 +24,7 @@ object MapFold {
           }
         } mkString (",")
       }
-    } foldLeft ("order by "))((a, b) => a + b)
+    } foldLeft ("order by ")) ((a, b) => a + b)
 
     Console println sort
   }
