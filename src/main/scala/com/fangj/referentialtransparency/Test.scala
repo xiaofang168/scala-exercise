@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: Test.scala
  * created at: 2014年9月17日
@@ -19,7 +17,7 @@ object Test extends App {
 
   read(new State)
   Console println read.apply(new State)
- 
+
   write("<<<<").apply(new State)
   write("<<<<")(new State)
 }
