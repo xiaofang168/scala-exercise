@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: State.scala
  * created at: 2014年9月17日
@@ -13,5 +11,5 @@ package com.fangj.referentialtransparency
  * @version: $Rev$
  */
 class State {
- var next: State = _
+  var next: State = _
 }

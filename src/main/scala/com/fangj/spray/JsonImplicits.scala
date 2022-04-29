@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: dbproxy-services
  * Description: JsonImplicits.scala
  * created at: 2014年7月21日
@@ -8,18 +6,17 @@
 package com.fangj.spray
 
 import spray.json.DefaultJsonProtocol
-import spray.json._
-import DefaultJsonProtocol._
-import spray.json.JsonParser
+
 /**
  * 对象json隐式转换处理
+ *
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
  * @Date: 2014年7月21日 下午1:30:47
  * @version: $Rev: 3248 $
  */
 object JsonImplicits extends DefaultJsonProtocol {
+
   import spray.json._
-  import DefaultJsonProtocol._
 
   implicit val impTerms = jsonFormat2(Terms)
   implicit val impAvg = jsonFormat1(Avg)
@@ -43,7 +40,8 @@ object JsonImplicits extends DefaultJsonProtocol {
       case maxf: MaxFun => maxf.toJson
       case minf: MinFun => minf.toJson
     }
-    // If you need to read, you will need something in the 
+
+    // If you need to read, you will need something in the
     // JSON that will tell you which subclass to use
     def read(value: JsValue) = {
       val fields = value.asJsObject.fields

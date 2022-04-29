@@ -1,6 +1,4 @@
 /*
- * Copyright 2015 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: User.scala
  * created at: 2015年2月2日
@@ -14,5 +12,5 @@ package com.fangj.flowservice
  */
 class User {
 
-  
+
 }

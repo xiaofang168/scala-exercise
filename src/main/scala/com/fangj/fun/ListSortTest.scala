@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: test
  * Description: ListSortTest.scala
  * created at: 2014年7月25日
