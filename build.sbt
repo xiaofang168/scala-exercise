@@ -12,6 +12,8 @@ scalacOptions ++= Seq(
   "-language:implicitConversions",
   "-language:higherKinds",
   "-language:existentials",
+  "-Wunused:imports",
+  "-Ywarn-unused",
   "-language:postfixOps", // 可以不用import scala.language.postfixOps
   "-Ymacro-annotations" // 请注意，我们正在使用 Scala 2.13，我们将需要启用-ymacro-annotation 编译器标志，以便我们能够使用 ZIO 提供的一些宏
 )
@@ -21,6 +23,8 @@ lazy val root = (project in file("."))
     name := "scala-exercise",
     organization := "com.fangj",
     version := "1.0",
+    semanticdbEnabled := true,
+    semanticdbVersion := scalafixSemanticdb.revision,
     libraryDependencies ++= dependencies
   )
 
