@@ -1,17 +1,15 @@
 /*
- * Copyright 2015 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: DynamicCode.scala
  * created at: 2015年2月2日
  */
 package com.fangj.workflow
 
-import java.lang.reflect.ParameterizedType
 import com.fangj.workflow.annotation.Process
 
 /**
  * 动态逻辑code
+ *
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
  * @Date: 2015年2月2日 下午5:11:20
  * @version: $Rev$
@@ -129,12 +127,12 @@ protected[this] object DynamicCode {
   def isWrapClass(clz: Class[_]) = {
     clz.isPrimitive()
   }
-  
+
   def main(args: Array[String]): Unit = {
     // Console println actor("com.fangj.flowservice.FlowService", "getBaoPiActor", "com.fangj.flowservice.Form")
     val clazz = Class.forName("com.fangj.flowservice.FlowService")
     getMethodParamTypes(clazz.newInstance(), "approve").foreach(println)
 
   }
-  
+
 }

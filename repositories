@@ -1,6 +1,6 @@
 [repositories]
   local
-  my-maven-proxy-releases: http://10.192.32.252:8081/nexus/content/groups/hik/
+  my-maven-proxy-releases: http://10.192.32.252:8081/nexus/content/groups
   olegychRepo: https://bitbucket.org/olegych/mvn/raw/default
   pluginRepo: http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases
   my-ivy-proxy-releases: https://repo.typesafe.com/typesafe/releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]

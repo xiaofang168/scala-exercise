@@ -1,15 +1,14 @@
 /*
- * Copyright 2015 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: WorkFlowFactory.scala
  * created at: 2015年2月2日
  */
 package com.fangj.workflow
 
+import java.io.File
+
 import com.twitter.util.Eval
 
-import java.io.File
 import scala.io.Source
 import scala.xml.Elem
 
@@ -181,7 +180,7 @@ object WorkFlowFactory {
   }
 
   def main(args: Array[String]): Unit = {
-    val xml: String = Source.fromFile(new File("C:\\Users\\fangjie1.HIK\\git\\scala-exercise\\src\\main\\resources\\workflow\\wf.xml")).mkString
+    val xml: String = Source.fromFile(new File("C:\\Users\\fangjie1\\git\\scala-exercise\\src\\main\\resources\\workflow\\wf.xml")).mkString
     val wf = scala.xml.XML.loadString(xml)
     val nodeList = getAllNode(wf)
     //println(nodeList)
