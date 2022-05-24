@@ -1,17 +1,12 @@
 /*
- * Copyright 2015 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: TestFlow.scala
  * created at: 2015年2月3日
  */
 package com.fangj
 
-import com.fangj.workflow.WorkFlowFactory
-import com.fangj.flowservice.Form
-import com.fangj.workflow.Action
-import com.fangj.flowservice.User
-import com.fangj.flowservice.FlowService
+import com.fangj.flowservice.{Form, User}
+import com.fangj.workflow.{Action, WorkFlowFactory}
 
 /**
  * @author: <a href="mailto:hbxffj@163.com">方杰</a>
