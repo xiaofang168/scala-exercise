@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: FactorialTest.scala
  * created at: 2014年9月26日
@@ -15,7 +13,7 @@ import scala.annotation.tailrec
  * @version: $Rev$
  */
 object FactorialTest {
-  
+
   @tailrec
   def factorialTailrec(n: BigInt, acc: BigInt): BigInt = {
     if (n <= 1) acc
@@ -26,5 +24,5 @@ object FactorialTest {
     val result = BigInt("2").pow(12)
     println(result)
   }
-  
+
 }
