@@ -1,6 +1,4 @@
 /*
- * Copyright 2015 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: Form.scala
  * created at: 2015年2月2日
@@ -14,7 +12,7 @@ import com.fangj.workflow.FlowForm
  * @Date: 2015年2月2日 上午11:41:15
  * @version: $Rev$
  */
-class Form extends FlowForm{
+class Form extends FlowForm {
   var id: Int = _
   var name: String = _
   var creator: String = _
