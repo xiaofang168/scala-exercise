@@ -1,6 +1,4 @@
 /*
- * Copyright 2015 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: Test.scala
  * created at: 2015年3月18日
@@ -14,16 +12,16 @@ package com.fangj.variance
  */
 trait A[+T]
 
-class C[+T] extends A[T]  // C是invariant的
+class C[+T] extends A[T] // C是invariant的
 
 class X
 
 class Y extends X
 
-object Test extends App{
-  
-  val t:C[X] = new C[Y]
-  
-  val list:List[X] = List[Y]()
-  
+object Test extends App {
+
+  val t: C[X] = new C[Y]
+
+  val list: List[X] = List[Y]()
+
 }
