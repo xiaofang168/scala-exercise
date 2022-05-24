@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: ArrayAppend.scala
  * created at: 2014年8月8日
@@ -14,9 +12,9 @@ package com.fangj.fun
  */
 object ArrayAppend {
   def main(args: Array[String]): Unit = {
-	  val a = Array(1,2)
-	  val b = Array(3,4)
-	  val c = a++b
-	  println(c mkString (""))
+    val a = Array(1, 2)
+    val b = Array(3, 4)
+    val c = a ++ b
+    println(c mkString (""))
   }
 }

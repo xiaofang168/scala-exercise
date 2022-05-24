@@ -1,6 +1,4 @@
 /*
- * Copyright 2014 The Hikvision CO.Ltd
- * site: http://www.hikvision.com
  * Prject: scala-exercise
  * Description: Test.scala
  * created at: 2014年8月21日
