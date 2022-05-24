@@ -35,7 +35,8 @@ object Dependencies {
     "org.json4s" %% "json4s-jackson" % "4.0.3",
     "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4",
     "org.apache.httpcomponents" % "httpclient" % "4.5.13",
-    "org.projectlombok" % "lombok" % "1.18.12" % "provided"
+    "org.projectlombok" % "lombok" % "1.18.12" % "provided",
+    "org.apache.camel" % "camel-core" % "3.14.0"
   )
 
   lazy val circeDependencies = Seq(
