@@ -1,7 +1,13 @@
 package com.fangj.camel
 
+import com.alibaba.fastjson.serializer.SerializerFeature
+import com.alibaba.fastjson.{JSON, JSONArray, JSONObject}
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.impl.DefaultCamelContext
+import org.apache.camel.{Exchange, Processor}
+
+import scala.jdk.CollectionConverters._
+import scala.language.implicitConversions
 
 /**
  * Camel最核心的功能就是提供路由引擎。
@@ -16,11 +22,46 @@ import org.apache.camel.impl.DefaultCamelContext
 object CamelFile {
 
   def main(args: Array[String]): Unit = {
+    val excludeRealname = List("杨彬", "张平", "朱安虎")
+    val usernameMap = Map("连幕天" -> "lianmutian",
+      "丁忠燊" -> "dingzhongshen",
+      "杨彬" -> "binyangbin",
+      "庄亚欧" -> "zhuangyaou",
+      "任彭" -> "royrenpeng",
+      "张鹏程" -> "asdzhangpengcheng",
+      "安永超" -> "anyongchao"
+    )
     val ctx = new DefaultCamelContext()
     ctx.addRoutes(new RouteBuilder() {
       // noop =true表示保留源文件，如果不加则表示移动文件到指定目录，原文件夹的文件会不在
       override def configure(): Unit = {
-        from("file:/Users/didi/camel/file_from?noop=true").to("file:/Users/didi/camel/file_to")
+        // include=.*.json|.*.txt
+        from("file:/Users/didi/camel/file_from?noop=true&include=.*.json")
+          .process(new Processor {
+            override def process(exchange: Exchange): Unit = {
+              val body = exchange.getMessage.getBody(classOf[String])
+              val array: JSONArray = JSON.parseArray(body)
+
+              val list: List[AnyRef] = array.asScala.filter(e => {
+                val setting: JSONObject = e.asInstanceOf[JSONObject]
+                val realName: String = setting.getString("realname")
+                val flag = setting.getString("team").equals("业务平台") && !excludeRealname.contains(realName)
+                // 设置username
+                if (flag) {
+                  setting.put("username", usernameMap.get(realName).get)
+                }
+                flag
+              }).toList
+
+              val javaList = list.asJava
+              val result = JSON.toJSONString(javaList, SerializerFeature.PrettyFormat)
+
+              // do something with the body and replace it back
+              exchange.getMessage.setBody(result)
+            }
+          })
+          // 重命名
+          .to("file:/Users/didi/camel/file_to?fileName=${file:name.noext}_done.${file:ext}")
       }
     })
     ctx.start()
