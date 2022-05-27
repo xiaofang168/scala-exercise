@@ -14,7 +14,7 @@ package com.fangj
  * @version: V1.0
  */
 object Test0603 {
-  def hello(m: String):Int = {
+  def hello(m: String): Int = {
     var a = 1
     for (i <- m) {
       Console println i
@@ -32,5 +32,7 @@ object Test0603 {
     val s = hello(m)
     val map: Map[String, Either[Double, String]] = Map("a" -> Left(1), "b" -> Right("hello"))
     println(s)
+    println(map)
   }
+
 }
