@@ -47,6 +47,10 @@ object Dependencies {
     "io.circe" %% "circe-generic-extras"
   ).map(_ % circeVersion)
 
+  lazy val fs2Dependencies = Seq(
+    "co.fs2" %% "fs2-core" % "3.2.4"
+  )
+
   lazy val dependencies = Seq(
     "com.twitter" % "util-eval_2.12" % "6.43.0" withSources() exclude("org.scala-lang.modules", "scala-parser-combinators_2.12"),
     "io.spray" %% "spray-json" % "1.3.6",
@@ -55,6 +59,6 @@ object Dependencies {
     "org.mongodb" % "casbah-core_2.12" % "3.1.1",
     "org.mongodb" % "casbah-gridfs_2.12" % "3.1.1",
     "org.mongodb" % "casbah-commons_2.12" % "3.1.1"
-  ) ++ testDependencies ++ circeDependencies ++ rootDependencies
+  ) ++ testDependencies ++ circeDependencies ++ fs2Dependencies ++ rootDependencies
 
 }
