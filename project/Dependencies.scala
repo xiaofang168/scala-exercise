@@ -36,7 +36,8 @@ object Dependencies {
     "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4",
     "org.apache.httpcomponents" % "httpclient" % "4.5.13",
     "org.projectlombok" % "lombok" % "1.18.12" % "provided",
-    "org.apache.camel" % "camel-core" % "3.14.0"
+    "org.apache.camel" % "camel-core" % "3.14.0",
+    "com.hubspot.jinjava" % "jinjava" % "2.6.0"
   )
 
   lazy val circeDependencies = Seq(
