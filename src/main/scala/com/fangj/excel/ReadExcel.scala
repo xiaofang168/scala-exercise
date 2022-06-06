@@ -71,4 +71,8 @@ object ReadExcel {
     System.out.println(json)
   }
 
+  def getPrettyJson(`object`: Any): String = {
+    JSON.toJSONString(`object`, SerializerFeature.PrettyFormat)
+  }
+
 }
