@@ -1,0 +1,73 @@
+{
+  "reportId": 172024,
+  "sliceId": 4142422,
+  "monitorName": "{{source}}_head",
+  "filters": [
+    {
+      "conditionIndex": null,
+      "columnCode": "datae_column_c902aa2b3b",
+      "dataSourceCode": "table_1653635662711",
+      "authType": 0,
+      "isParam": false,
+      "compareType": "eq",
+      "targetValue": [
+        "{{source}}"
+      ],
+      "targetType": "number",
+      "columnType": "dim",
+      "interval": ""
+    }
+  ],
+  "conditions": [
+    {
+      "conditionIndex": "T1",
+      "columnCode": "datae_column_98b2ae8d19",
+      "dataSourceCode": "table_1653635662711",
+      "authType": 0,
+      "isParam": false,
+      "compareType": "between",
+      "targetValue": [
+        "1"
+      ],
+      "targetType": "day",
+      "columnType": "dim",
+      "interval": "day_real"
+    }
+  ],
+  "ruleType": 1,
+  "expression": "",
+  "dispatchTime": "{{time}}",
+  "dispatchType": 2,
+  "dispatchDay": [],
+  "contactType": [
+    "mail",
+    "dchat",
+    "phone"
+  ],
+  "contacts": {
+    "mail": [
+      "jefffang@didiglobal.com",
+      "renmansheng@didiglobal.com"
+    ],
+    "dchatPerson": [
+      {
+        "name": "方杰",
+        "value": "jefffang"
+      },
+      {
+        "name": "任满盛",
+        "value": "renmansheng"
+      }
+    ],
+    "dchatGroup": [],
+    "sms": [],
+    "phone": [
+      "jefffang",
+      "renmansheng"
+    ]
+  },
+  "alarmLifted": 0,
+  "frequencyControl": 0,
+  "status": 1,
+  "contactRule": []
+}
