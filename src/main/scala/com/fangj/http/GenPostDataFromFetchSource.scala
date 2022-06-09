@@ -28,7 +28,7 @@ object GenPostDataFromFetchSource {
     val url = "http:///report/v2/display/viewReportData"
     val json = Source.fromFile(this.getClass.getResource("fetch.json").getPath).mkString
     val jsonStr = JSON.parseObject(json).toString
-    DomainHttpClientUtil.postJson(url, jsonStr, "233dda557f5e4904bbdcd2ddc564c765000280000")
+    DomainHttpClientUtil.postJson(url, jsonStr, "c6e4eb950c5840991d13b69db788ecd2000280000")
   }
 
   def toJSONArray(str: String): JSONArray = {
@@ -79,7 +79,7 @@ object GenPostDataFromFetchSource {
 
   def convert(cronMap: Map[String, String]): Map[String, String] = {
     cronMap map {
-      case (k, v) => (k, getFirstTime(v, 5))
+      case (k, v) => (k, getFirstTime(v, 40))
     }
   }
 
