@@ -83,8 +83,8 @@ object UsingFree {
   // "~>" 表示将F[A]转换为G[A]的函数，而G是个Monad
   val kvToFutureInterpreter = new (KVAlg ~> Future) {
     override def apply[A](fa: KVAlg[A]): Future[A] = fa match {
-      case Get(k) => /* go and talk to a database */ Future.successful(None)
-      case Put(k, v) => /* as above */ Future.successful(())
+      case Get(k) => /* go and talk to a database */ ???
+      case Put(k, v) => /* as above */ ???
     }
   }
 
