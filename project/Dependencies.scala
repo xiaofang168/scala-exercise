@@ -6,6 +6,9 @@ object Dependencies {
 
   val circeVersion = "0.14.1"
 
+  // 自动引入cats-core、cats-effect
+  val fs2Version = "3.2.8"
+
   lazy val testDependencies = Seq(
     "org.scalactic" %% "scalactic" % "3.2.11",
     "org.scalatest" %% "scalatest" % "3.2.11" % "test",
@@ -13,8 +16,7 @@ object Dependencies {
 
   lazy val rootDependencies = Seq(
     "joda-time" % "joda-time" % "2.9.9",
-    "org.typelevel" %% "cats-core" % "2.0.0",
-    "org.typelevel" %% "cats-free" % "2.0.0",
+    "org.typelevel" %% "cats-free" % "2.7.0",
     "com.typesafe.akka" %% "akka-actor" % akkaVersion,
     "com.typesafe.akka" %% "akka-stream" % akkaVersion,
     "com.typesafe.akka" %% "akka-persistence" % akkaVersion,
@@ -49,7 +51,8 @@ object Dependencies {
   ).map(_ % circeVersion)
 
   lazy val fs2Dependencies = Seq(
-    "co.fs2" %% "fs2-core" % "3.2.4"
+    "co.fs2" %% "fs2-core" % fs2Version,
+    "co.fs2" %% "fs2-io" % fs2Version
   )
 
   lazy val dependencies = Seq(
