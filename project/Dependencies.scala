@@ -52,7 +52,10 @@ object Dependencies {
 
   lazy val fs2Dependencies = Seq(
     "co.fs2" %% "fs2-core" % fs2Version,
-    "co.fs2" %% "fs2-io" % fs2Version
+    "co.fs2" %% "fs2-io" % fs2Version,
+    "org.gnieh" %% "fs2-data-json" % "1.4.0",
+    "org.gnieh" %% "fs2-data-json-circe" % "1.4.0",
+    "io.circe" %% "circe-fs2" % "0.14.0"
   )
 
   lazy val dependencies = Seq(
