@@ -6,6 +6,18 @@ import _root_.io.circe.generic.extras.semiauto._
 import cats.effect.{IO, IOApp}
 import fs2.data.json._
 import fs2.{Fallible, Stream}
+import io.circe.generic.JsonCodec
+
+import scala.concurrent.duration._
+
+@JsonCodec
+case class Data(field1: Int, field2: Option[String], field3: List[Int])
+
+@JsonCodec
+case class WrappedData(field1: Int, field2: Option[String], field3: List[Wrapped])
+
+@JsonCodec
+case class Wrapped(test: Int)
 
 sealed trait Event
 
@@ -16,8 +28,6 @@ case class RemoveCounter(name: String) extends Event
 case class IncreaseCounter(name: String) extends Event
 
 object Event {
-
-
   implicit val configuration = Configuration.default.withDiscriminator("type")
 
   implicit val encoder: Encoder[Event] = deriveConfiguredEncoder
@@ -46,11 +56,37 @@ object ReadJsonFile extends IOApp.Simple {
 
     val asts = stream.through(ast.values[Fallible, Json])
 
-    asts
-      .compile
-      .toList
+    val values = stream.through(codec.deserialize[Fallible, Data])
+
+    val outer = asts ++ values
+
+    Stream.eval(asts.toList
       .fold(error => IO(println(error)),
-        success => IO(println(s"$success")))
+        success => IO(println(s"$success"))))
+      .concurrently(Stream.eval(values.toList
+        .fold(error => IO(println(error)),
+          success => IO(println(s"$success"))))).interruptAfter(10.seconds)
+      .compile
+      .drain
+
+    //    outer
+    //      .compile
+    //      .toList
+    //      .fold(error => IO(println(error)),
+    //        success => IO(println(s"$success")))
+
+    //    asts
+    //      .compile
+    //      .toList
+    //      .fold(error => IO(println(error)),
+    //        success => IO(println(s"$success")))
+    //
+    //
+    //    values
+    //      .compile
+    //      .toList
+    //      .fold(error => IO(println(error)),
+    //        success => IO(println(s"$success")))
 
   }
 
