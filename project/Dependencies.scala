@@ -17,9 +17,6 @@ object Dependencies {
   lazy val rootDependencies = Seq(
     "joda-time" % "joda-time" % "2.9.9",
     "org.typelevel" %% "cats-free" % "2.7.0",
-    "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-    "com.typesafe.akka" %% "akka-stream" % akkaVersion,
-    "com.typesafe.akka" %% "akka-persistence" % akkaVersion,
     "com.typesafe.akka" %% "akka-http" % "10.2.9",
     "org.iq80.leveldb" % "leveldb" % "0.7",
     "org.fusesource.leveldbjni" % "leveldbjni-all" % "1.8",
@@ -41,6 +38,13 @@ object Dependencies {
     "org.apache.camel" % "camel-core" % "3.14.0",
     "com.hubspot.jinjava" % "jinjava" % "2.6.0"
   )
+
+  lazy val akkaDependencies = Seq(
+    "com.typesafe.akka" %% "akka-actor",
+    "com.typesafe.akka" %% "akka-stream",
+    "com.typesafe.akka" %% "akka-persistence",
+    "com.typesafe.akka" %% "akka-actor-typed",
+  ).map(_ % akkaVersion)
 
   lazy val circeDependencies = Seq(
     "io.circe" %% "circe-core",
@@ -66,6 +70,6 @@ object Dependencies {
     "org.mongodb" % "casbah-core_2.12" % "3.1.1",
     "org.mongodb" % "casbah-gridfs_2.12" % "3.1.1",
     "org.mongodb" % "casbah-commons_2.12" % "3.1.1"
-  ) ++ testDependencies ++ circeDependencies ++ fs2Dependencies ++ rootDependencies
+  ) ++ testDependencies ++ akkaDependencies ++ circeDependencies ++ fs2Dependencies ++ rootDependencies
 
 }
