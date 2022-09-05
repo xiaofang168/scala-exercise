@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 巡检配置集合
  *
- * @author jefffang
+ * @author fangjie
  * @date Created in 9:23 下午 2022/3/29.
  */
 @Data

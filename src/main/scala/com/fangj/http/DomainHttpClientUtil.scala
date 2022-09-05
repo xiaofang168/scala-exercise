@@ -7,13 +7,13 @@ import org.apache.http.util.EntityUtils
 
 object DomainHttpClientUtil {
 
-  def postJson(url: String, body: String, ddcTicket: String): String = {
+  def postJson(url: String, body: String, ticket: String): String = {
     val client = HttpClients.createDefault
     val httpPost = new HttpPost(url)
     httpPost.addHeader("Content-Type", "application/json;charset=utf-8")
     httpPost.addHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36")
     // cookie必传
-    httpPost.addHeader("Cookie", s"ddc_ticket=$ddcTicket;username=jefffang")
+    httpPost.addHeader("Cookie", s"ticket=$ticket;username=")
     httpPost.addHeader("Host", "..com")
     httpPost.setEntity(new StringEntity(body, "utf-8"))
     val resp = client.execute(httpPost)
