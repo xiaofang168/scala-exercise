@@ -30,20 +30,18 @@ object DataCommitApp {
     SourceData(2000, "20:10"),
     List(SourceData(200, "21:10"), SourceData(200, "21:20"), SourceData(200, "21:20"), SourceData(300, "21:30")),
     SourceData(200, "22:10"),
-    "")
+    "localhost")
 
   def main(args: Array[String]): Unit = {
-    // 
+
     commit(CommitData("", BizExt(batchData.rc.count).asJson.noSpaces, DateTime.parse(batchData.day + " " + batchData.rc.time + ":00", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).getMillis, batchData.ip))
 
-    // 
     val packageData = batchData.packages.map(e => CommitData("", BizExt(e.count).asJson.noSpaces,
       DateTime.parse(batchData.day + " " + e.time + ":00",
         DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).getMillis, batchData.ip))
     packageData.foreach(commit(_))
 
-    // 
-    commit(CommitData("dept_collection_fa", BizExt(batchData.fa.count).asJson.noSpaces, DateTime.parse(batchData.day + " " + batchData.fa.time + ":00", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).getMillis, batchData.ip))
+    commit(CommitData("", BizExt(batchData.fa.count).asJson.noSpaces, DateTime.parse(batchData.day + " " + batchData.fa.time + ":00", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).getMillis, batchData.ip))
   }
 
   def commit(data: CommitData): Unit = {

@@ -1,9 +1,10 @@
 package com.fangj.http
 
+import java.util
+
 import com.google.common.collect.Maps
 import com.hubspot.jinjava.Jinjava
 
-import java.util
 import scala.io.Source
 
 object DataTmplParse {
@@ -15,7 +16,7 @@ object DataTmplParse {
 
   def parse(source: String, time: String): String = {
     val jinjava = new Jinjava()
-    val context: util.Map[String, String] = Maps.newHashMap
+    val context: util.Map[String, String] = Maps.newHashMap[String, String]
     context.put("source", source)
     context.put("time", time)
     val template = Source.fromFile(this.getClass.getResource("data_tmpl.json").getPath).mkString
