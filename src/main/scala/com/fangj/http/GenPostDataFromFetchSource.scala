@@ -51,7 +51,7 @@ object GenPostDataFromFetchSource {
 
   def collectCron(): Map[String, String] = {
     val map = scala.collection.mutable.Map[String, String]()
-    val str: String = DomainHttpClientUtil.get("http://10.161.179.23:8083/xxljob/triggers?group=119,155")
+    val str: String = DomainHttpClientUtil.get("")
     val nObject: JSONObject = JSON.parseObject(str)
     val array: JSONArray = nObject.getJSONArray("data")
     array.forEach(e => {
@@ -63,12 +63,12 @@ object GenPostDataFromFetchSource {
         (e.split("=")(0), e.split("=")(1))
       }).toMap
 
-      val productId: String = paramMap.get("productId").getOrElse("")
-      val fundsChannelId: String = paramMap.get("fundsChannelId").getOrElse("")
+      val pid: String = paramMap.get("pid").getOrElse("")
+      val cid: String = paramMap.get("cid").getOrElse("")
       val startIndex: String = paramMap.get("startIndex").getOrElse("")
       val endIndex: String = paramMap.get("endIndex").getOrElse("")
       val overdue: String = paramMap.get("overdue").getOrElse("")
-      val source: String = String.format("deduct_%s_%s_%s_%s", productId, fundsChannelId, startIndex, endIndex)
+      val source: String = String.format("deduct_%s_%s_%s_%s", pid, cid, startIndex, endIndex)
       if (StringUtils.isNotBlank(overdue)) {
         map += (source + "_" + overdue -> jobCron)
       } else {
