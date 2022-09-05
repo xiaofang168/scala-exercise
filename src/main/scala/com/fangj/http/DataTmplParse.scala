@@ -10,7 +10,7 @@ import scala.io.Source
 object DataTmplParse {
 
   def main(args: Array[String]): Unit = {
-    val str: String = parse("_2001__12_28", "09:50:00")
+    val str: String = parse("d_2001__12_28", "09:50:00")
     println(str)
   }
 
