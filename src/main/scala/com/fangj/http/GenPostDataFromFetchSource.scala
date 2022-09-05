@@ -63,12 +63,12 @@ object GenPostDataFromFetchSource {
         (e.split("=")(0), e.split("=")(1))
       }).toMap
 
-      val : String = paramMap.get("").getOrElse("")
-      val : String = paramMap.get("").getOrElse("")
+      val pid: String = paramMap.get("pid").getOrElse("")
+      val cid: String = paramMap.get("cid").getOrElse("")
       val startIndex: String = paramMap.get("startIndex").getOrElse("")
       val endIndex: String = paramMap.get("endIndex").getOrElse("")
       val overdue: String = paramMap.get("overdue").getOrElse("")
-      val source: String = String.format("deduct_%s_%s_%s_%s", , , startIndex, endIndex)
+      val source: String = String.format("deduct_%s_%s_%s_%s", pid, cid, startIndex, endIndex)
       if (StringUtils.isNotBlank(overdue)) {
         map += (source + "_" + overdue -> jobCron)
       } else {
