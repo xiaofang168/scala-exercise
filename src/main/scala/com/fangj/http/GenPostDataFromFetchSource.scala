@@ -1,13 +1,14 @@
 package com.fangj.http
 
+import java.io.{File, PrintWriter}
+import java.util.Date
+
 import com.alibaba.fastjson.{JSON, JSONArray, JSONObject}
 import com.fangj.excel.ReadExcel
 import com.fangj.fun.PipelineOp._
 import org.apache.commons.lang3.StringUtils
 import org.joda.time.DateTime
 
-import java.io.{File, PrintWriter}
-import java.util.Date
 import scala.io.Source
 import scala.jdk.CollectionConverters._
 
@@ -25,7 +26,7 @@ object GenPostDataFromFetchSource {
   }
 
   def fetch(): String = {
-    val url = "http://bigdata.xiaojukeji.com/report/v2/display/viewReportData"
+    val url = "http://..com/report/v2/display/viewReportData"
     val json = Source.fromFile(this.getClass.getResource("fetch.json").getPath).mkString
     val jsonStr = JSON.parseObject(json).toString
     DomainHttpClientUtil.postJson(url, jsonStr, "c6e4eb950c5840991d13b69db788ecd2000280000")
