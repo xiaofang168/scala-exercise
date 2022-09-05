@@ -16,7 +16,7 @@ object PostWithCookies {
     println(s"数组大小：$size")
     parseResult.hcursor.values.get.foreach(e => {
       val body = e.hcursor.top.get.noSpaces
-      val result = DomainHttpClientUtil.postJson("http://bigdata.xiaojukeji.com/report/v2/monitor/config/save", body, "c6e4eb950c5840991d13b69db788ecd2000280000")
+      val result = DomainHttpClientUtil.postJson("http://..com/report/v2/monitor/config/save", body, "c6e4eb950c5840991d13b69db788ecd2000280000")
       println(result)
       //println(e.hcursor.downField("dispatchTime").as[String].getOrElse(">>>"))
     })
@@ -26,7 +26,7 @@ object PostWithCookies {
     //    val array: JSONArray = JSON.parseArray(json)
     //    array.forEach(e => {
     //      val body: String = e.asInstanceOf[JSONObject].toJSONString
-    //      val result = DomainHttpClientUtil.postJson("http://bigdata.xiaojukeji.com/report/v2/monitor/config/save", body, "c6e4eb950c5840991d13b69db788ecd2000280000")
+    //      val result = DomainHttpClientUtil.postJson("http://..com/report/v2/monitor/config/save", body, "c6e4eb950c5840991d13b69db788ecd2000280000")
     //      println(result)
     //    })
   }

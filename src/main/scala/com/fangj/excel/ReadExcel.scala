@@ -10,7 +10,7 @@ import scala.jdk.CollectionConverters._
 object ReadExcel {
 
   def main(args: Array[String]): Unit = {
-    val list: java.util.List[DataBean] = EasyExcelFactory.read("/Users/didi/test_new.xlsx").head(classOf[DataBean])
+    val list: java.util.List[DataBean] = EasyExcelFactory.read("/Users//test_new.xlsx").head(classOf[DataBean])
       .sheet(0)
       .doReadSync()
 
@@ -62,7 +62,7 @@ object ReadExcel {
     settingsList.foreach(e => println(e.getProject))
 
     // 写入json文件
-    //FileUtils.writeStringToFile(new File("/Users/didi/inspection.json"), JSON.toJSONString(settingsList.asJava, SerializerFeature.PrettyFormat), UTF_8)
+    //FileUtils.writeStringToFile(new File("/Users//inspection.json"), JSON.toJSONString(settingsList.asJava, SerializerFeature.PrettyFormat), UTF_8)
     //prettyJson(settingsList.asJava)
   }
 

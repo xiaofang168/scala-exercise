@@ -36,7 +36,7 @@ object CamelFile {
       // noop =true表示保留源文件，如果不加则表示移动文件到指定目录，原文件夹的文件会不在
       override def configure(): Unit = {
         // include=.*.json|.*.txt
-        from("file:/Users/didi/camel/file_from?noop=true&include=.*.json")
+        from("file:/Users//camel/file_from?noop=true&include=.*.json")
           .process(new Processor {
             override def process(exchange: Exchange): Unit = {
               val body = exchange.getMessage.getBody(classOf[String])
@@ -61,7 +61,7 @@ object CamelFile {
             }
           })
           // 重命名
-          .to("file:/Users/didi/camel/file_to?fileName=${file:name.noext}_done.${file:ext}")
+          .to("file:/Users//camel/file_to?fileName=${file:name.noext}_done.${file:ext}")
       }
     })
     ctx.start()
