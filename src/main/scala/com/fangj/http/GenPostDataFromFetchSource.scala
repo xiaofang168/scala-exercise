@@ -26,7 +26,7 @@ object GenPostDataFromFetchSource {
   }
 
   def fetch(): String = {
-    val url = "http://..com/report/v2/display/viewReportData"
+    val url = ""
     val json = Source.fromFile(this.getClass.getResource("fetch.json").getPath).mkString
     val jsonStr = JSON.parseObject(json).toString
     DomainHttpClientUtil.postJson(url, jsonStr, "c6e4eb950c5840991d13b69db788ecd2000280000")
@@ -68,7 +68,7 @@ object GenPostDataFromFetchSource {
       val startIndex: String = paramMap.get("startIndex").getOrElse("")
       val endIndex: String = paramMap.get("endIndex").getOrElse("")
       val overdue: String = paramMap.get("overdue").getOrElse("")
-      val source: String = String.format("deduct_%s_%s_%s_%s", pid, cid, startIndex, endIndex)
+      val source: String = String.format("d_%s_%s_%s_%s", pid, cid, startIndex, endIndex)
       if (StringUtils.isNotBlank(overdue)) {
         map += (source + "_" + overdue -> jobCron)
       } else {
