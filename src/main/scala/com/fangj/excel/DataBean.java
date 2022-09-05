@@ -1,7 +1,7 @@
 package com.fangj.excel;
 
 /**
- * @author jefffang
+ * @author fangjie
  * @date Created in 10:45 上午 2022/4/7.
  */
 public class DataBean {
@@ -87,7 +87,7 @@ public class DataBean {
     public void setUrl(String url) {
         this.url = url;
     }
-    
+
     public String getProblem() {
         return problem;
     }

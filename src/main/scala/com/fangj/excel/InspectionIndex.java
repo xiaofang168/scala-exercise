@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 巡检指标
  *
- * @author jefffang
+ * @author fangjie
  * @date Created in 1:57 下午 2022/4/1.
  */
 @Data
