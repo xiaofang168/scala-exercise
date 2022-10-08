@@ -17,8 +17,8 @@ object ReadExcel {
     // 过滤掉特殊的设置
     val haveProjectResult = list.asScala
       .toList.filter(e => StringUtils.isNotBlank(e.getProject) && StringUtils.isNotBlank(e.getDailyTimer)
-      && !e.getProject.replace("\u200B", "").trim.equals("dept-collection")
-      && !e.getProject.replace("\u200B", "").trim.equals("abs系统")
+      && !e.getProject.replace("\u200B", "").trim.equals("")
+      && !e.getProject.replace("\u200B", "").trim.equals("")
       && StringUtils.isNotBlank(e.getUrl))
 
     // 按项目分组

@@ -1,14 +1,13 @@
 package com.fangj.http
 
-import java.io.{File, PrintWriter}
-import java.util.Date
-
 import com.alibaba.fastjson.{JSON, JSONArray, JSONObject}
 import com.fangj.excel.ReadExcel
 import com.fangj.fun.PipelineOp._
 import org.apache.commons.lang3.StringUtils
 import org.joda.time.DateTime
 
+import java.io.{File, PrintWriter}
+import java.util.Date
 import scala.io.Source
 import scala.jdk.CollectionConverters._
 
@@ -42,7 +41,7 @@ object GenPostDataFromFetchSource {
     array.forEach(e => {
       val jsonObject: JSONObject = e.asInstanceOf[JSONObject]
       val source: String = jsonObject.getString("table_1653635662711.datae_column_c902aa2b3b")
-      if (source.contains("3080")) {
+      if (source.contains("")) {
         sourceSet += source
       }
     })
