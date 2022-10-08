@@ -1,16 +1,15 @@
 package com.fangj.http
 
-import java.util
-
 import com.google.common.collect.Maps
 import com.hubspot.jinjava.Jinjava
 
+import java.util
 import scala.io.Source
 
 object DataTmplParse {
 
   def main(args: Array[String]): Unit = {
-    val str: String = parse("d_2001_3080_12_28", "09:50:00")
+    val str: String = parse("d_2001_12_28", "09:50:00")
     println(str)
   }
 
