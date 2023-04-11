@@ -22,14 +22,14 @@ import scala.language.implicitConversions
 object CamelFile {
 
   def main(args: Array[String]): Unit = {
-    val excludeRealname = List("杨彬", "张平", "朱安虎")
-    val usernameMap = Map("连幕天" -> "lianmutian",
-      "丁忠燊" -> "dingzhongshen",
-      "杨彬" -> "binyangbin",
-      "庄亚欧" -> "zhuangyaou",
-      "任彭" -> "royrenpeng",
-      "张鹏程" -> "asdzhangpengcheng",
-      "安永超" -> "anyongchao"
+    val excludeRealname = List("a", "b", "c")
+    val usernameMap = Map("a" -> "a",
+      "" -> "",
+      "" -> "",
+      "" -> "",
+      "" -> "",
+      "" -> "",
+      "" -> ""
     )
     val ctx = new DefaultCamelContext()
     ctx.addRoutes(new RouteBuilder() {
